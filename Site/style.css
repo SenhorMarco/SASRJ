@@ -42,8 +42,16 @@ header{
 }
 
 
-.menu{
- 
+.menu nav a.home{
+    text-decoration: underline;
+}
+
+.menu nav a.contatos{
+    text-decoration: underline;
+}
+
+.menu nav a.sobre{
+    text-decoration: underline;
 }
 
 footer{
