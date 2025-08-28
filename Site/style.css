@@ -12,7 +12,7 @@ header{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Playfair Display", serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 .container{
@@ -32,6 +32,7 @@ header{
     color: aliceblue;
     text-decoration: none;
     padding-right: 30px;
+    padding-left: 5px;
     font-size: 18px;
     position: relative;
 }
@@ -62,4 +63,16 @@ footer{
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+li{
+    list-style-type: circle;
+}
+
+.contatos{
+    padding: 20px;
+}
+
+.caixa_SAC{
+    text-align: center;
 }
