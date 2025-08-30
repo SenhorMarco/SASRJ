@@ -80,3 +80,20 @@ li{
 .main_home{
     padding: 20px;
 }
+
+.sobre{
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.titulo_sobre{
+    color: rgb(15, 111, 167);
+}
+
+p{
+    font-size: 15px;
+    text-align: justify;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
