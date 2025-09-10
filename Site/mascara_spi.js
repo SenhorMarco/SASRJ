@@ -4,13 +4,22 @@ import * as mi from "./mapa_interativo.js";
 export var interpolacao = true;
 export var dados_recebidos
 
-export const SPI_MAX = 3;
-export const SPI_MIN = -3;
-export const ALPHA_MAX = 0.65;
-export const ALPHA_MIN = 0;
+export const ALPHA_MAX = 0.6;
 
-const VERMELHO = "#ff0004";
-const AZUL = "#1100ff";
+const SECA_FRACA = "#ffc400";
+const SECA_MODERADA = "#cf903e";
+const SECA_GRAVE = "#e06a1b";
+const SECA_EXTREMA = "#d61f06";
+const SECA_EXCEPCIONAL = "#471407";
+
+const CHUVA_FRACA = "#40e0d0";       // turquesa claro
+const CHUVA_MODERADA = "#2ba580";    // verde-azulado médio
+const CHUVA_GRAVE = "#1b7cd6";       // azul forte
+const CHUVA_EXTREMA = "#0635d6";     // azul profundo
+const CHUVA_EXCEPCIONAL = "#2e1ca4ff"; // azul-marinho quase preto
+
+
+
 
 class Quadrante {
     constructor(longitude, latitude, spi) {
@@ -29,7 +38,7 @@ class Quadrante {
     mm = mes
     dd = dia
 */
-var dados = await cs.pescar_dados(cs.ENDERECO, cs.PORTA, "0120250607");
+var dados = await cs.pescar_dados(cs.ENDERECO, cs.PORTA, "0620250607");
 
 var dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
 var dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
@@ -37,11 +46,62 @@ var dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => ne
 
 
 function escala_alpha(spi) {
-    if (spi > 0) {
-        return Math.min((spi / SPI_MAX), ALPHA_MAX);
+    var spi_abs = Math.abs(spi);
+    if(spi_abs < 0.5){
+        return 0;
+    }
+    else if (spi_abs < 0.8) {
+        return 0.2 * ALPHA_MAX;
+    }
+    else if (spi_abs < 1.3) {
+        return 0.4 * ALPHA_MAX;
+    }
+    else if (spi_abs < 1.6) {
+        return 0.6 * ALPHA_MAX;
+    }
+    else if (spi_abs < 2) {
+        return 0.8 * ALPHA_MAX;
     }
     else {
-        return Math.min((spi / SPI_MIN), ALPHA_MAX);
+        return ALPHA_MAX;
+    }
+}
+
+function escala_cores(spi) {
+    if (spi < 0) {
+        if (spi < -0.8) {
+            return SECA_FRACA;
+        }
+        else if (spi < -1.3) {
+            return SECA_MODERADA;
+        }
+        else if (spi < -1.6) {
+            return SECA_GRAVE;
+        }
+        else if (spi < -2) {
+            return SECA_EXTREMA;
+        }
+        else {
+            return SECA_EXCEPCIONAL;
+        }
+    }
+
+    else {
+        if (spi < -0.8) {
+            return CHUVA_FRACA;
+        }
+        else if (spi < -1.3) {
+            return CHUVA_MODERADA;
+        }
+        else if (spi < -1.6) {
+            return CHUVA_GRAVE;
+        }
+        else if (spi < -2) {
+            return CHUVA_EXTREMA;
+        }
+        else {
+            return CHUVA_EXCEPCIONAL;
+        }
     }
 }
 
@@ -129,9 +189,9 @@ async function gerar_quadrantes() {
     }
 
     for (var longitude = mi.LONGITUDE_MIN; longitude <= mi.LONGITUDE_MAX; longitude += mi.ARESTA / 2) {
-        var coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA/2));
+        var coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA / 2));
         for (var latitude = mi.LATITUDE_MIN; latitude <= mi.LATITUDE_MAX; latitude += mi.ARESTA / 2) {
-            var linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA/2));
+            var linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA / 2));
             var spi_quadrante = dados_interpolacao_teste[coluna][linha];
             var quadrante = {
                 "type": "Feature",
@@ -149,8 +209,8 @@ async function gerar_quadrantes() {
                 smoothFactor: "3",
                 fillOpacity: escala_alpha(spi_quadrante).toString(),
                 opacity: escala_alpha(spi_quadrante).toString(),
-                color: (spi_quadrante > 0) ? AZUL : VERMELHO,
-                fillColor: (spi_quadrante > 0) ? AZUL : VERMELHO
+                color: escala_cores(spi_quadrante),
+                fillColor: escala_cores(spi_quadrante)
             });
         }
     }
