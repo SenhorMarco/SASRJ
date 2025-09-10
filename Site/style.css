@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+
+header{
+    padding: 20px;
+    background-color: rgb(190, 14, 14);
+    width: 100%;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.logo{
+    left: 20px;
+    font-family: fantasy;
+    color: azure;
+}
+
+.menu nav a{
+    color: aliceblue;
+    text-decoration: none;
+    padding-right: 30px;
+    padding-left: 5px;
+    font-size: 18px;
+    position: relative;
+}
+
+.menu nav a.inscrever{
+    color: rgb(3, 170, 231);
+    padding-right: 0;
+}
+
+
+.menu nav a.home{
+    text-decoration: underline;
+}
+
+.menu nav a.contatos{
+    text-decoration: underline;
+}
+
+.menu nav a.sobre{
+    text-decoration: underline;
+}
+
+footer{
+    background-color: rgb(190, 14, 14);
+    color: aliceblue;
+    padding: 0.5%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+li{
+    list-style-type: circle;
+}
+
+.contatos{
+    padding: 20px;
+}
+
+.caixa_SAC{
+    text-align: center;
+}
+
+.main_home{
+    padding: 20px;
+}
+
+.sobre{
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.titulo_sobre{
+    color: rgb(15, 111, 167);
+}
+
+p{
+    font-size: 15px;
+    text-align: justify;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
