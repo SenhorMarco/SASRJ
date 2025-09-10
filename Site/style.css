@@ -1,11 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 
-
 header{
     padding: 20px;
     background-color: rgb(190, 14, 14);
     width: 100%;
+}
+
+/* html{
+    height: 100%;
+} */
+
+/* Faz o body ocupar a altura inteira e empurra o footer para baixo */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 *{
@@ -55,14 +65,16 @@ header{
     text-decoration: underline;
 }
 
-footer{
-    background-color: rgb(190, 14, 14);
-    color: aliceblue;
-    padding: 0.5%;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+footer.footer {
+  position: static;    /* NÃO fixed */
+  width: 100%;
+  background-color: rgb(190, 14, 14);
+  color: aliceblue;
+  padding: 0.5%;
+  text-align: center;
+
+  /* Espaço entre o fim do main e o footer (ajuste o valor se quiser mais/menos) */
+  margin-top: 2rem;
 }
 
 li{
@@ -77,8 +89,9 @@ li{
     text-align: center;
 }
 
-.main_home{
+main{
     padding: 20px;
+    flex: 1 0 auto;
 }
 
 .sobre{
