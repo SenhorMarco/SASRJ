@@ -38,7 +38,22 @@
     <script src="comunicacao_servidor.js" type="module"></script>
     <script src="mascara_spi.js" type="module"></script>
 <main class="main_home">
-    
+    <label for="data">Data de análise:</label>
+    <input type="date" id="data">
+    <br>
+    <label for="intervalo">Intervalo de análise de dados (em meses):</label>
+    <select id="intervalos" name="intervalos">
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="6">6</option>
+        <option value="12">12</option>
+        <option value="24">24</option>
+        <option value="48">48</option>
+        <option value="60">60</option>
+    </select>
+    <br>
+    <button id="botao_gerar">Gerar vizualização</button>
+
 </main>
 
 
