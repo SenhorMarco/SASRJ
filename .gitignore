@@ -1,0 +1,9 @@
+Site/2025
+.gitignore
+Site/Dados
+Site/mancha_spi.js
+Site/mapa_inmet.js
+Site/mapa_interativo_og.js
+Site/mapa_interativo.js
+Site/mapa_interativo2.js
+Site/script.js

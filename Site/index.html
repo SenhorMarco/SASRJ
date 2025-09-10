@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAS\RJ</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 
@@ -25,8 +32,13 @@
     </div>
 </header>
 
+<body>
+    <div id='mapa_interativo' style='width: 700px; height: 500px; margin:auto'></div>
+    <script src="mapa_interativo.js" type="module"></script>
+    <script src="comunicacao_servidor.js" type="module"></script>
+    <script src="mascara_spi.js" type="module"></script>
 <main class="main_home">
-    Monitor de Secas para o estado do Rio de Janeiro
+    
 </main>
 
 
@@ -36,5 +48,6 @@
 
 </body>
 
+<footer>kossorovski</footer>
 
 </html>
