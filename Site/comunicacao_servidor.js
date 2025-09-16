@@ -18,6 +18,7 @@ window.onload = () => {
 
 
 export async function pescar_dados(endereco,porta,mensagem){
+    transferencia.sucesso = false;
     var ws = new WebSocket(`ws://${endereco}:${porta}`);
     var checar_open = new Promise((resolve,reject) => {
         var check = setInterval(() => {

@@ -6,17 +6,35 @@ export var dados_recebidos
 
 export const ALPHA_MAX = 0.7;
 
-const SECA_FRACA = "#ffc400";
-const SECA_MODERADA = "#cf903e";
+const SECA_FRACA = "#f1c329ff";
+const SECA_MODERADA = "#d79846ff";
 const SECA_GRAVE = "#e06a1b";
 const SECA_EXTREMA = "#d61f06";
-const SECA_EXCEPCIONAL = "#471407";
+const SECA_EXCEPCIONAL = "#af0303ff";
 
-const CHUVA_FRACA = "#40e0d0";       // turquesa claro
-const CHUVA_MODERADA = "#2ba580";    // verde-azulado médio
-const CHUVA_GRAVE = "#1b7cd6";       // azul forte
-const CHUVA_EXTREMA = "#0635d6";     // azul profundo
-const CHUVA_EXCEPCIONAL = "#2e1ca4ff"; // azul-marinho quase preto
+const CHUVA_FRACA = "#16ffe8ff";
+const CHUVA_MODERADA = "#239271ff";
+const CHUVA_GRAVE = "#1b7cd6";
+const CHUVA_EXTREMA = "#0635d6";
+const CHUVA_EXCEPCIONAL = "#28198fff";
+
+var gerando = false;
+
+let check_pagina_carregada = new Promise((resolve, reject) => {
+    let check_intervalo = setInterval(() => {
+        if (document.readyState === "complete") {
+            resolve();
+            clearInterval(check_intervalo);
+        }
+    }, 20);
+});
+await check_pagina_carregada;
+
+var botao_gerar = document.getElementById("botao_gerar");
+var botao_limpar = document.getElementById("botao_limpar");
+var input_data = document.getElementById("data");
+var input_spi = document.getElementById("intervalo");
+
 
 class Quadrante {
     constructor(longitude, latitude, spi) {
@@ -33,14 +51,14 @@ class Quadrante {
     mm = mes
     dd = dia
 */
-var dados = await cs.pescar_dados(cs.ENDERECO, cs.PORTA, "1220250607");
 
-var dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
-var dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
+let dados;
+let dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
+let dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
 
 function escala_alpha(spi) {
-    var spi_abs = Math.abs(spi);
-    if(spi_abs < 0.5){
+    let spi_abs = Math.abs(spi);
+    if (spi_abs < 0.5) {
         return 0;
     }
     else if (spi_abs < 0.8) {
@@ -62,16 +80,16 @@ function escala_alpha(spi) {
 
 function escala_cores(spi) {
     if (spi < 0) {
-        if (spi < -0.8) {
+        if (spi > -0.8) {
             return SECA_FRACA;
         }
-        else if (spi < -1.3) {
+        else if (spi > -1.3) {
             return SECA_MODERADA;
         }
-        else if (spi < -1.6) {
+        else if (spi > -1.6) {
             return SECA_GRAVE;
         }
-        else if (spi < -2) {
+        else if (spi > -2) {
             return SECA_EXTREMA;
         }
         else {
@@ -99,8 +117,8 @@ function escala_cores(spi) {
 }
 
 async function interpolacao_inverso_distancia(dados) {
-    for (var coluna = 0; coluna < mi.COLUNAS_MATRIZ; coluna++) {
-        for (var linha = 0; linha < mi.LINHAS_MATRIZ; linha++) {
+    for (let coluna = 0; coluna < mi.COLUNAS_MATRIZ; coluna++) {
+        for (let linha = 0; linha < mi.LINHAS_MATRIZ; linha++) {
             if (coluna === 0 && linha === 0) {
                 dados_interpolacao[coluna][linha][0] = dados_interpolacao[coluna][linha][1] = dados_interpolacao[coluna][linha][2] = dados_interpolacao[coluna][linha][3] = dados[coluna][linha];
                 //canto superior esquerdo
@@ -168,11 +186,18 @@ async function interpolacao_inverso_distancia(dados) {
 
 
 async function gerar_quadrantes() {
-    for (var longitude = mi.LONGITUDE_MIN; longitude <= mi.LONGITUDE_MAX; longitude += mi.ARESTA) {
-        var coluna_atual = Math.round((longitude - mi.LONGITUDE_MIN) / mi.ARESTA);
-        for (var latitude = mi.LATITUDE_MIN; latitude <= mi.LATITUDE_MAX; latitude += mi.ARESTA) {
-            var linha_atual = Math.round((latitude - mi.LATITUDE_MIN) / mi.ARESTA);
-            var spi_quadrante = dados_interpolacao[coluna_atual][linha_atual];
+    mi.mapa.eachLayer((layer) => {
+        if (layer.toGeoJSON) {
+            mi.mapa.removeLayer(layer);
+        }
+    });
+
+    for (let longitude = mi.LONGITUDE_MIN; longitude < mi.LONGITUDE_MAX; longitude += mi.ARESTA) {
+        let coluna_atual = Math.round((longitude - mi.LONGITUDE_MIN) / mi.ARESTA);
+        console.log(coluna_atual);
+        for (let latitude = mi.LATITUDE_MIN; latitude < mi.LATITUDE_MAX; latitude += mi.ARESTA) {
+            let linha_atual = Math.round((latitude - mi.LATITUDE_MIN) / mi.ARESTA);
+            let spi_quadrante = dados_interpolacao[coluna_atual][linha_atual];
 
             dados_interpolacao_teste[coluna_atual * 2][linha_atual * 2] = spi_quadrante[0];
             dados_interpolacao_teste[coluna_atual * 2 + 1][linha_atual * 2] = spi_quadrante[1];
@@ -181,12 +206,13 @@ async function gerar_quadrantes() {
         }
     }
 
-    for (var longitude = mi.LONGITUDE_MIN; longitude <= mi.LONGITUDE_MAX; longitude += mi.ARESTA / 2) {
-        var coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA / 2));
-        for (var latitude = mi.LATITUDE_MIN; latitude <= mi.LATITUDE_MAX; latitude += mi.ARESTA / 2) {
-            var linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA / 2));
-            var spi_quadrante = dados_interpolacao_teste[coluna][linha];
-            var quadrante = {
+    for (let longitude = mi.LONGITUDE_MIN; longitude < mi.LONGITUDE_MAX; longitude += (mi.ARESTA / 2)) {
+        let coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA / 2));
+        for (let latitude = mi.LATITUDE_MIN; latitude < mi.LATITUDE_MAX; latitude += (mi.ARESTA / 2)) {
+            let linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA / 2));
+            console.log(coluna + " " + linha);
+            let spi_quadrante = dados_interpolacao_teste[coluna][linha];
+            let quadrante = {
                 "type": "Feature",
                 "geometry": {
                     "type": "Polygon",
@@ -196,7 +222,7 @@ async function gerar_quadrantes() {
                     [longitude - mi.ARESTA / 4, latitude - mi.ARESTA / 4]]]
                 }
             }
-            var camada_quadrante = L.geoJSON(quadrante).addTo(mi.mapa);
+            let camada_quadrante = L.geoJSON(quadrante).addTo(mi.mapa);
             camada_quadrante.setStyle({
                 weight: "0.1",
                 smoothFactor: "3",
@@ -207,8 +233,24 @@ async function gerar_quadrantes() {
             });
         }
     }
+    console.log("ACABEII");
+    return 1;
 }
-dados_interpolacao = await interpolacao_inverso_distancia(dados);
-console.log(dados_interpolacao);
-console.log(dados_interpolacao_teste);
-gerar_quadrantes();
+
+botao_gerar.onclick = async () => {
+    botao_gerar.disabled = true;
+    dados = await cs.pescar_dados(cs.ENDERECO, cs.PORTA, input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
+    dados_interpolacao = await interpolacao_inverso_distancia(dados);
+    gerar_quadrantes();
+    botao_gerar.disabled = false;
+}
+
+botao_limpar.onclick = async () =>{
+    botao_limpar.disabled = true;
+    mi.mapa.eachLayer((layer) => {
+        if (layer.toGeoJSON) {
+            mi.mapa.removeLayer(layer);
+        }
+    });
+    botao_limpar.disabled = false;
+}
