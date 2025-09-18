@@ -110,3 +110,10 @@ p{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.container_mapa{
+    display: flex;
+    gap: 40px;
+}
+
+

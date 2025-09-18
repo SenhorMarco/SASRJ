@@ -33,11 +33,20 @@
 </header>
 
 <body>
-    <div id='mapa_interativo' style='width: 700px; height: 500px; margin:auto'></div>
+
+<main class="main_home">
+
+    <h3 style="font-size: 30px; margin-top: 15px;text-decoration:underline; margin-left: 50px;">Mapa de Secas </h3>
+
+
+    <div class="container_mapa">
+
+    <div id='mapa_interativo' style='width: 600px; height: 400px; margin-top: 20px; margin-left: 50px;'></div>
     <script src="mapa_interativo.js" type="module"></script>
     <script src="comunicacao_servidor.js" type="module"></script>
     <script src="mascara_spi.js" type="module"></script>
-<main class="main_home">
+
+    <div class="seletor" style="margin-top: 150px; margin-left: 40px;">
     <label for="data">Data de análise:</label>
     <input type="date" id="data">
     <br>
@@ -53,6 +62,9 @@
     </select>
     <br>
     <button id="botao_gerar">Gerar vizualização</button>
+    </div>
+
+    </div>
 
 </main>
 
