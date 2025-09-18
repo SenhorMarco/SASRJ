@@ -1,5 +1,6 @@
 import * as cs from "./comunicacao_servidor.js";
 import * as mi from "./mapa_interativo.js";
+import * as lj from "./ler_json.js";
 
 export var interpolacao = true;
 export var dados_recebidos
@@ -18,8 +19,6 @@ const CHUVA_GRAVE = "#1b7cd6";
 const CHUVA_EXTREMA = "#0635d6";
 const CHUVA_EXCEPCIONAL = "#28198fff";
 
-var gerando = false;
-
 let check_pagina_carregada = new Promise((resolve, reject) => {
     let check_intervalo = setInterval(() => {
         if (document.readyState === "complete") {
@@ -31,18 +30,8 @@ let check_pagina_carregada = new Promise((resolve, reject) => {
 await check_pagina_carregada;
 
 var botao_gerar = document.getElementById("botao_gerar");
-var botao_limpar = document.getElementById("botao_limpar");
 var input_data = document.getElementById("data");
 var input_spi = document.getElementById("intervalo");
-
-
-class Quadrante {
-    constructor(longitude, latitude, spi) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.spi = spi;
-    }
-}
 
 /*
     estrutura da mensagem: "xxaaaammdd"
@@ -210,7 +199,6 @@ async function gerar_quadrantes() {
         let coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA / 2));
         for (let latitude = mi.LATITUDE_MIN; latitude < mi.LATITUDE_MAX; latitude += (mi.ARESTA / 2)) {
             let linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA / 2));
-            console.log(coluna + " " + linha);
             let spi_quadrante = dados_interpolacao_teste[coluna][linha];
             let quadrante = {
                 "type": "Feature",
@@ -233,24 +221,16 @@ async function gerar_quadrantes() {
             });
         }
     }
-    console.log("ACABEII");
     return 1;
 }
 
 botao_gerar.onclick = async () => {
+    if(input_data.value === ""){
+        return;
+    }
     botao_gerar.disabled = true;
-    dados = await cs.pescar_dados(cs.ENDERECO, cs.PORTA, input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
+    dados = await lj.pescar_dados(input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
     dados_interpolacao = await interpolacao_inverso_distancia(dados);
     gerar_quadrantes();
     botao_gerar.disabled = false;
-}
-
-botao_limpar.onclick = async () =>{
-    botao_limpar.disabled = true;
-    mi.mapa.eachLayer((layer) => {
-        if (layer.toGeoJSON) {
-            mi.mapa.removeLayer(layer);
-        }
-    });
-    botao_limpar.disabled = false;
 }
