@@ -12,6 +12,10 @@ LINHAS_MATRIZ = (LATITUDE_MAX - LATITUDE_MIN)/ARESTA
 HOST = "localhost"
 PORT = 7177
 
+# Esse código aqui ta inutilizado
+# Mas vai ficar no projeto por motivos históricos
+# E se for de interesse de alguém
+
 
 def enviar_dados(websocket):
     #estrutura da mensagem: "xxaaaammdd"
@@ -26,6 +30,8 @@ def enviar_dados(websocket):
     mes = mensagem[6:8]
     dia = mensagem[8:10]
     
+
+
     dataset = xr.open_dataset(
         r"Site/Dados/MERGE_CPTEC_spi_gamma_{alcance}.nc".format(alcance=alcance_spi),
         engine="netcdf4"

@@ -12,12 +12,19 @@ export var transferencia = {
 
 var dados_pescados = Array.from(Array(mi.COLUNAS_MATRIZ), () => new Array(mi.LINHAS_MATRIZ));
 
+
+/* Esse módulo aqui ta inutilizado porque não existe mais comunicação com o script de ler os arquivos
+Vai ser mantido no projeto por motivos históricos
+Mas saiba que nada aqui é chamado mais
+*/
+
 window.onload = () => {
     pagina_carregada = true;
 }
 
 
 export async function pescar_dados(endereco,porta,mensagem){
+    transferencia.sucesso = false;
     var ws = new WebSocket(`ws://${endereco}:${porta}`);
     var checar_open = new Promise((resolve,reject) => {
         var check = setInterval(() => {
