@@ -211,6 +211,7 @@ async function gerar_quadrantes() {
                 }
             }
             let camada_quadrante = L.geoJSON(quadrante).addTo(mi.mapa);
+            camada_quadrante.bindPopup(`Latitude:${latitude.toFixed(2)}<br>Longitude:${longitude.toFixed(2)}<br>SPI:${spi_quadrante.toFixed(2)}`);
             camada_quadrante.setStyle({
                 weight: "0.1",
                 smoothFactor: "3",
