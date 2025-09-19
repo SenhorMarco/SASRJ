@@ -21,6 +21,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: #f4f4f4;
+
+  background-image: url('/Site/img/bg_drought_matizada_op25.png');
+  background-attachment: fixed;
 }
 
 *{
@@ -34,6 +37,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
     
 }
 
@@ -130,7 +134,7 @@ p{
   /* Estilos básicos que você já pode ter */
   background-color: #c0392b; /* Um vermelho mais sóbrio */
   color: white;
-  padding: 10px 24px;
+  padding: 10px 100px;
   border: none;
   border-radius: 8px; /* Cantos um pouco mais arredondados */
   /* font-family: 'Montserrat', sans-serif; Usando a fonte que sugerimos */
@@ -152,18 +156,37 @@ p{
 
 
 .seletor_data{
-    margin-top: 5px;
-    margin-bottom: 5px;
+  padding: 5px 5px;
+  margin-top: 3px;
+  margin-bottom: 5px; 
+  width: auto;
+  max-width: 250px; 
+
+
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .seletor_meses{
 
-}
+  padding: 5px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: auto;
+  max-width: 250px;
 
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 .seletor{
     margin: auto;
-    margin-left: 40px;
+    margin-left: 0px;
     flex: 1;
+    text-align: center;
 }
 
 .mapa{
@@ -180,12 +203,14 @@ p{
     padding-right: 30px;
 }
 
+
+
 /* ================================== */
 /* ESTILOS PARA TELAS PEQUENAS */
 /* ================================== */
 
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
 
   .container_mapa{
     flex-direction: column;
