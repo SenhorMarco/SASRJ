@@ -9,8 +9,8 @@ import json
 # E complica o processo de despache do site
 # SDIYBT
 
-arquivo_convertido = "Dados/MERGE_CPTEC_spi_gamma_06.nc"
-variavel = "spi_gamma_06" # Mudar o número dependendo do arquivo
+arquivo_convertido = "Dados/MERGE_CPTEC_spi_gamma_01.nc"
+variavel = "spi_gamma_01" # Mudar o número dependendo do arquivo
 pasta = f"DadosJSON/{variavel}"
 
 os.makedirs(pasta, exist_ok=True)

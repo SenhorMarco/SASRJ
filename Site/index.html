@@ -26,7 +26,7 @@
                 <a href="index.html" class="home">Home</a>
                 <a href="sobre.html">Sobre</a>
                 <a href="contatos.html">Contatos</a>
-                <a class="inscrever" href="#">Inscreva-se</a>
+                <a href="inmet.html">INMET</a>
             </nav>
         </div>
     </div>
@@ -36,22 +36,22 @@
 
 <main class="main_home">
 
-    <h3 style="font-size: 30px; margin-top: 15px;text-decoration:underline; margin-left: 50px;">Mapa de Secas </h3>
+    <h3 style="font-size: 30px; margin-top: 15px;text-decoration:underline; margin-left: 100px;">Mapa de Secas </h3>
 
 
     <div class="container_mapa">
 
-    <div id='mapa_interativo' style='width: 600px; height: 400px; margin-top: 20px; margin-left: 50px;'></div>
+    <div id='mapa_interativo' class="mapa"></div>
     <script src="mapa_interativo.js" type="module"></script>
     <script src="comunicacao_servidor.js" type="module"></script>
     <script src="mascara_spi.js" type="module"></script>
 
-    <div class="seletor" style="margin-top: 150px; margin-left: 40px;">
+    <div class="seletor">
     <label for="data">Data de análise:</label>
-    <input type="date" id="data">
+    <input type="date" id="data" class="seletor_data">
     <br>
     <label for="intervalo">Intervalo de análise de dados (em meses):</label>
-    <select id="intervalo" name="intervalo">
+    <select id="intervalo" name="intervalo" class="seletor_meses">
         <option value="1">1</option>
         <option value="3">3</option>
         <option value="6">6</option>
@@ -61,7 +61,8 @@
         <option value="60">60</option>
     </select>
     <br>
-    <button id="botao_gerar">Gerar vizualização</button>
+    <button id="botao_gerar" class="butao">Gerar vizualização</button></div>
+    </div>
 </main>
 
 
