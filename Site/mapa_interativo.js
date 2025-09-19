@@ -15,7 +15,7 @@ export const LATITUDE_MAX_DADOS = 12.85; //lat min dos dados: 12.85
 export const ARESTA = 0.1; //realmente constante, determinada pela precisão dos dados
 export const COLUNAS_MATRIZ = (LONGITUDE_MAX - LONGITUDE_MIN) / ARESTA;
 export const LINHAS_MATRIZ = (LATITUDE_MAX - LATITUDE_MIN) / ARESTA;
-export const ZOOM_MAX = 12;
+export const ZOOM_MAX = 11;
 export const ZOOM_MIN = 8;
 
 export const OFM_ESTILO = "https://tiles.openfreemap.org/styles/liberty";
