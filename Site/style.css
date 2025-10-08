@@ -6,9 +6,11 @@
 /* ================================== */
 
 header{
-    padding: 20px;
-    background-color: #B74134;
-    width: 100%;
+  margin: auto;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #B74134;
+  width: 80%;
 }
 
 /* html{
@@ -20,10 +22,16 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f4f4f4;
 
-  background-image: url('/Site/img/bg_drought_matizada_op25.png');
+  background-image: url('/img/bg_drought_matizada_op18.png');
   background-attachment: fixed;
+}
+
+.main_home{
+  margin: auto;
+  width: 80%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
 *{
@@ -79,23 +87,28 @@ body {
 }
 
 footer.footer {
+  margin: auto;
   position: static;    /* NÃO fixed */
-  width: 100%;
+  width: 80%;
   background-color: #B74134;
   color: aliceblue;
   padding: 0.5%;
   text-align: center;
 
   /* Espaço entre o fim do main e o footer (ajuste o valor se quiser mais/menos) */
-  margin-top: 2rem;
+  margin-top: 10px;
 }
 
 li{
     list-style-type: circle;
 }
 
-.contatos{
+.contatos_main{
     padding: 20px;
+    margin: auto;
+    width: 80%;
+    background-color: #f4f4f4;
+    
 }
 
 .caixa_SAC{
@@ -111,6 +124,9 @@ main{
     padding: 20px;
     padding-left: 30px;
     padding-right: 30px;
+    margin: auto;
+    width: 80%;
+    background-color: #f4f4f4;
 }
 
 
@@ -128,13 +144,17 @@ p{
 .container_mapa{
     display: flex;
     gap: 40px;
+    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px
 }
 
 .butao{
   /* Estilos básicos que você já pode ter */
   background-color: #c0392b; /* Um vermelho mais sóbrio */
   color: white;
-  padding: 10px 100px;
+  padding: 10px;
+  width: 90%;
   border: none;
   border-radius: 8px; /* Cantos um pouco mais arredondados */
   /* font-family: 'Montserrat', sans-serif; Usando a fonte que sugerimos */
@@ -193,7 +213,6 @@ p{
     width: 600px;
     height: 400px;
     margin-top: 20px;
-    margin-left: 100px;
     flex: 1.5;
 }
 
@@ -201,6 +220,16 @@ p{
     padding: 20px;
     padding-left: 30px;
     padding-right: 30px;
+    margin: auto;
+    width: 80%;
+    background-color: #f4f4f4;
+}
+
+.titulo_mapa{
+  font-size: 30px;
+  margin-top: 15px;
+  text-decoration:underline;
+  margin-left: 90px;
 }
 
 
@@ -210,7 +239,7 @@ p{
 /* ================================== */
 
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
 
   .container_mapa{
     flex-direction: column;
@@ -219,7 +248,7 @@ p{
   }
 
   .mapa {
-    width: calc(100% - 24px); deixa uma folga nas laterais
+    width: calc(100% - 24px); /* deixa uma folga nas laterais
     height: 400px;            /* altura clara em telas pequenas */
     min-height: 300px;
     margin-top: 20px;
@@ -240,5 +269,64 @@ p{
     width: 100%;;
   }
 
+  .contatos_main{
+  padding: 20px;
+    
+}
+
+.main_home{
+background-color: ;
+padding-left: 0;
+padding-right: 0;
+width: 100%;
+background-color: #f4f4f4;
+
+}
+
+header{
+  margin: auto;
+  margin-bottom: 0px;
+  padding: 15px;
+  background-color: #B74134;
+  width: 100%;
+}
+
+.inmet_main{
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+footer.footer {
+  margin: auto;
+  position: static;    /* NÃO fixed */
+  width: 100%;
+  background-color: #B74134;
+  color: aliceblue;
+  padding: 0.5%;
+  text-align: center;
+
+  /* Espaço entre o fim do main e o footer (ajuste o valor se quiser mais/menos) */
+  margin-top: 0px;
+}
+
+.sobre_main{
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+
+.contatos_main{
+    padding: 20px;
+    margin: auto;    
+}
+
+.titulo_mapa{
+  font-size: 30px;
+  margin-top: 15px;
+  text-decoration:underline;
+  margin-left: 40px;
+}
 
 }
