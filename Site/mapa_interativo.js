@@ -18,7 +18,7 @@ export const LINHAS_MATRIZ = (LATITUDE_MAX - LATITUDE_MIN) / ARESTA;
 export const ZOOM_MAX = 11;
 export const ZOOM_MIN = 8;
 
-export const OFM_ESTILO = "https://tiles.openfreemap.org/styles/liberty";
+export const OFM_ESTILO = "https://tiles.openfreemap.org/styles/bright";
 export const OFM_ATTRIBUTION = "OpenFreeMap © OpenMapTiles Data from OpenStreetMap";
 
 export var mapa = L.map('mapa_interativo', {
@@ -33,3 +33,13 @@ L.maplibreGL({
   attribution: OFM_ATTRIBUTION
 }).addTo(mapa);
 
+L.control.scale().addTo(mapa);
+
+fetch('geojs-33-mun.json')
+    .then(response => response.json())
+    .then(data => {
+        L.geoJSON(data).addTo(mapa);
+    })
+    .catch(error => {
+        console.error('Error loading GeoJSON:', error);
+});

@@ -1,38 +1,60 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS\RJ Sobre</title>
+    <title>SAS\RJ</title>
     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<header class="contatos">
+
+<body>
+    
+<header class="inmet">
     <div class="container">
         <div class="logo">Sistema de Alertas de Seca RJ - SAS\RJ</div>
         <div class="menu">
             <nav>
                 <a href="index.html">Home</a>
+                <a href="inmet.html" class="inmet">INMET</a>
                 <a href="sobre.html">Sobre</a>
                 <a href="contatos.html">Contatos</a>
-                <a href="inmet.html" class="inmet">INMET</a>
             </nav>
         </div>
     </div>
 </header>
 
-
 <body>
-    <main class="inmet_main">
-        oi
 
-    </main>
+<main class="main_inmet">
+    <div class="container_mapa">
 
-<footer class="footer">Todos os direitos reservados a Davi Braga.</footer>
+    <img id='mapa_inmet' class="mapa"></div>
+    <script src="mapa_inmet.js" type="module"></script>
+
+    <div class="seletor">
+    <label for="data">Data de análise:</label>
+    <input type="date" id="data" class="seletor_data">
+    <br>
+    <label for="intervalo">Intervalo de análise de dados (em meses):</label>
+    <select id="intervalo" name="intervalo" class="seletor_meses">
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="6">6</option>
+        <option value="12">12</option>
+        <option value="24">24</option>
+    </select>
+    <br>
+    <button id="botao_puxar" class="butao">Puxar mapa</button></div>
+    </div>
+</main>
+
+
+<footer class="footer"></footer>
 
 </body>
-
-
-
 
 </html>

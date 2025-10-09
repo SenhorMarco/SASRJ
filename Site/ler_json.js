@@ -2,12 +2,6 @@ import * as mi from "./mapa_interativo.js";
 
 export var pagina_carregada = false;
 
-export var transferencia = {
-    coluna: 0,
-    linha: 0,
-    sucesso : false
-}
-
 var dados_pescados;
 var dados_corrigidos = Array.from(Array(mi.COLUNAS_MATRIZ), () => new Array(mi.LINHAS_MATRIZ));
 
@@ -21,11 +15,9 @@ let coluna_final = Math.round((mi.LONGITUDE_MAX - mi.LONGITUDE_MIN_DADOS)/mi.ARE
 let linha_final = Math.round((mi.LATITUDE_MAX - mi.LATITUDE_MIN_DADOS)/mi.ARESTA);
 
 export async function pescar_dados(mensagem){
-    transferencia.sucesso = false;
     let spi = mensagem.substring(0,2);
     let ano = mensagem.substring(2,6);
     let mes = mensagem.substring(6,8);
-    console.log(spi + " " + ano + " " +mes);
 
     let json_leitura = await fetch(`DadosJSON/spi_gamma_${spi}/spi_gamma_${spi}_${ano}-${mes}.json`);
     dados_pescados = JSON.parse(await json_leitura.text())[`spi_gamma_${spi}`];
@@ -33,7 +25,7 @@ export async function pescar_dados(mensagem){
 
     //HORRÍVEL mas ta dando certo então por mim tudo bem....
     //Se for mudar qualquer coisa isso aqui tem que mudar também :P
-    
+
     dados_pescados.splice(0, linha_inicial-7); //7???
     dados_pescados.splice(mi.LINHAS_MATRIZ);
     dados_pescados.forEach((valor) => {

@@ -191,7 +191,7 @@ p{
 
 .mapa{
     width: 600px;
-    height: 400px;
+    height: 500px;
     margin-top: 20px;
     margin-left: 100px;
     flex: 1.5;
@@ -203,6 +203,27 @@ p{
     padding-right: 30px;
 }
 
+.legenda {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    margin: 0 0 5px;
+    color: #777;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.legenda i {
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.9;
+}
 
 
 /* ================================== */
@@ -219,7 +240,7 @@ p{
   }
 
   .mapa {
-    width: calc(100% - 24px); deixa uma folga nas laterais
+    width: calc(100% - 24px); /*deixa uma folga nas laterais*/
     height: 400px;            /* altura clara em telas pequenas */
     min-height: 300px;
     margin-top: 20px;
