@@ -35,11 +35,11 @@ L.maplibreGL({
 
 L.control.scale().addTo(mapa);
 
-fetch('geojs-33-mun.json')
+/*fetch('geojs-33-mun.json')
     .then(response => response.json())
     .then(data => {
         L.geoJSON(data).addTo(mapa);
     })
     .catch(error => {
         console.error('Error loading GeoJSON:', error);
-});
+});*/
