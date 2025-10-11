@@ -25,8 +25,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  background-image: url('/img/bg_drought_matizada_op18.png');
+  background-image: url('/img/passeio-de-bondinho-no-rj-corcovadoo-conexao123.webp');
   background-attachment: fixed;
+  background-position: center;
 }
 
 .main_home{
@@ -250,7 +251,7 @@ p{
   .mapa {
     width: calc(100% - 24px); /* deixa uma folga nas laterais
     height: 400px;            /* altura clara em telas pequenas */
-    min-height: 400px;
+    min-height: 500px;
     margin-top: 20px;
     margin-left: 0;           /* anula a margin-left:100px do desktop */
     margin-right: 0;

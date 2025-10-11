@@ -33,6 +33,11 @@ L.maplibreGL({
   attribution: OFM_ATTRIBUTION
 }).addTo(mapa);
 
+export var alerta = L.icon({
+  iconUrl:"img/alerta.png",
+  iconSize:[30, 30]
+});
+
 L.control.scale().addTo(mapa);
 
 /*fetch('geojs-33-mun.json')

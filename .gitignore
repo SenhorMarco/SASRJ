@@ -1,8 +1,3 @@
-Site/2025
 .gitignore
 Site/Dados
-Site/mancha_spi.js
-Site/mapa_interativo_og.js
-Site/mapa_interativo2.js
-Site/script.js
 Site/DadosJSON

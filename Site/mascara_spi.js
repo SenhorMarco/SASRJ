@@ -1,5 +1,6 @@
 import * as mi from "./mapa_interativo.js";
 import * as lj from "./ler_json.js";
+import * as ae from "./alerta_estados.js"
 
 export var dados_recebidos
 export const ALPHA_MAX = 0.7;
@@ -38,7 +39,21 @@ var input_spi = document.getElementById("intervalo");
 
 let dados;
 let dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
-export let dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
+let dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
+
+//legenda do mapa
+var legenda = L.control({position: 'bottomright'});
+legenda.onAdd =  ()=> {
+    var div = L.DomUtil.create('div', 'legenda'),
+    grades = [" > 2", "> 1.6", "> 1.3", "> 0.8", "> 0.5", "< -0.5", "< -0.8", "< -1.3", "< -1.6", "< -2"],
+    cores = [CHUVA_EXCEPCIONAL, CHUVA_EXTREMA, CHUVA_GRAVE, CHUVA_MODERADA, CHUVA_FRACA, SECA_FRACA, SECA_MODERADA, SECA_GRAVE, SECA_EXTREMA, SECA_EXCEPCIONAL];
+    div.innerHTML += "Legenda SPI/SPEI:<br>"
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML += '<i style="background:' + cores[i] + '"></i> ' + grades[i] + "<br>";
+    }
+    return div;
+};
+legenda.addTo(mi.mapa);
 
 function escala_alpha(spi) {
     let spi_abs = Math.abs(spi);
@@ -220,23 +235,18 @@ botao_gerar.onclick = async () => {
     if(input_data.value === ""){
         return;
     }
+
+    //gerar coloração no mapa
     botao_gerar.disabled = true;
     dados = await lj.pescar_dados(input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
     dados_interpolacao = await interpolacao_inverso_distancia(dados);
     gerar_quadrantes();
     botao_gerar.disabled = false;
+
+    //gerar relatório
+    let estados_alerta = ae.analisar_estados(dados_interpolacao_teste);
+    console.log(estados_alerta);
+    ae.adicionar_sinais(estados_alerta);
+
 }
 
-//legenda do mapa
-var legenda = L.control({position: 'bottomright'});
-legenda.onAdd =  ()=> {
-    var div = L.DomUtil.create('div', 'legenda'),
-    grades = [" > 2", "> 1.6", "> 1.3", "> 0.8", "> 0.5", "< -0.5", "< -0.8", "< -1.3", "< -1.6", "< -2"],
-    cores = [CHUVA_EXCEPCIONAL, CHUVA_EXTREMA, CHUVA_GRAVE, CHUVA_MODERADA, CHUVA_FRACA, SECA_FRACA, SECA_MODERADA, SECA_GRAVE, SECA_EXTREMA, SECA_EXCEPCIONAL];
-    div.innerHTML += "Legenda SPI/SPEI:<br>"
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML += '<i style="background:' + cores[i] + '"></i> ' + grades[i] + "<br>";
-    }
-    return div;
-};
-legenda.addTo(mi.mapa);
