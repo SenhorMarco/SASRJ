@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAS\RJ Contatos</title>
+    <title>SAS/RJ Contatos</title>
+    <link rel="icon" href="img/SAS-RJ_logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
 
-<header class="contatos">
+<header class="home">
     <div class="container">
-        <div class="logo">Sistema de Alertas de Seca RJ - SAS\RJ</div>
+        <div style="display: flex; flex-direction: row; gap: 10px;"><div><img src="img/SAS-RJ_logo.png" alt="SAS/RJ" style="width: 30px;"></div><div class="logo">Sistema de Alertas de Seca RJ - SAS/RJ</div></div>
         <div class="menu">
             <nav>
-                <a href="index.html">Home</a>
-                <a href="inmet.html">INMET</a>
-                <a href="sobre.html">Sobre</a>
-                <a href="contatos.html" class="contatos">Contatos</a>
+                <div class="naveg">
+                <div class="home_div"><a href="index.html">Home</a></div>
+                <div class="inmet_div"><a href="inmet.html">INMET</a></div>
+                <div class="sobre_div"><a href="sobre.html">Sobre</a></div>
+                <div class="contatos_div"><a href="contatos.html" class="contatos">Contatos</a></div>
+                </div>
             </nav>
         </div>
     </div>
@@ -52,7 +55,36 @@
             <form id="botao" action="#"><textarea name="SAC" placeholder="Deixe seu comentário aqui..." rows="7" style="width: 60%;"></textarea><button type="button" onclick="virus()">Enviar</button></form></div>
     </main>
 
-<footer class="footer"></footer>
+<footer class="footer">
+<div class="container_footer">
+
+<!-- <div class="navegação_footer">
+    <p style="margin: auto;">Mapa do site</p>
+    <a href="index.html" class="footer_nav">Home</a>
+    <a href="sobre.html" class="footer_nav">Sobre</a>
+    <a href="contatos.html" class="footer_nav">Contatos</a>
+    <a href="inmet.html" class="footer_nav">INMET</a>
+</div> -->
+
+
+<div class="apoio_footer">
+
+    <p style="text-decoration: solid; text-decoration: underline; text-align: center;">Apoio:</p>
+    <div style="display: flex; flex-direction: row;"><div><img src="img/ime_logo.png" alt="Logo do IME" style="width: 50px;"></div> <div style="margin: auto; color: black;">Instituto Militar de Engenharia</div></div>
+
+
+    <p style="text-decoration: solid; text-decoration: underline; margin-bottom: 10px; text-align: center;">Créditos:</p>
+    <div style="display: flex; flex-direction: row; gap: 15px;"><div><img src="img/inmet_logo.png" alt="Logo do Inmet" style="width: 40px; border-radius: 8px;"></div> <div style="margin: auto; color: black;">Instituto Nacional de Metereologia</div></div>
+
+</div>
+
+</div> 
+
+<br> <hr> <br>
+
+Todos os direitos reservados.
+
+</footer>
 
 </body>
 

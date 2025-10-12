@@ -47,8 +47,9 @@ body {
 .container{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     gap: 20px;
+    align-items: center;
     
 }
 
@@ -56,15 +57,21 @@ body {
     left: 20px;
     font-family: fantasy;
     color: azure;
+    margin: auto;
+}
+
+
+.naveg{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin: auto;
 }
 
 .menu nav a{
     color: aliceblue;
     text-decoration: none;
-    padding-right: 30px;
-    padding-left: 5px;
     font-size: 18px;
-    position: relative;
 }
 
 .menu nav a.inscrever{
@@ -75,10 +82,12 @@ body {
 
 .menu nav a.home{
     text-decoration: underline;
+    justify-content: ;
 }
 
 .menu nav a.contatos{
     text-decoration: underline;
+    margin: auto;
 }
 
 .menu nav a.sobre{
@@ -112,10 +121,10 @@ li{
 }
 
 .contatos_main{
-    padding: 20px;
-    margin: auto;
-    width: 80%;
-    background-color: #f4f4f4;
+  margin: auto;
+  width: 80%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
     
 }
 
@@ -129,12 +138,10 @@ main{
 }
 
 .sobre_main{
-    padding: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin: auto;
-    width: 80%;
-    background-color: #f4f4f4;
+  margin: auto;
+  width: 80%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
 
@@ -158,6 +165,11 @@ p{
 } */
 
 .butao{
+  /* --- Adicione estas 3 linhas --- */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+
   /* Estilos básicos que você já pode ter */
   background-color: #c0392b; /* Um vermelho mais sóbrio */
   color: white;
@@ -168,10 +180,12 @@ p{
   /* font-family: 'Montserrat', sans-serif; Usando a fonte que sugerimos */
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
   cursor: pointer;
   margin-top: 0px;
   box-shadow: 0 6px #999;
-  margin: auto;
+  margin: 0;
+  margin-right: 5px;
 }
 
 .butao:hover{
@@ -225,13 +239,15 @@ p{
     flex: 1.5;
 } */
 
-.inmet_main{
-    padding: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin: auto;
-    width: 80%;
-    background-color: #f4f4f4;
+.main_inmet{
+  margin: auto;
+  width: 80%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .titulo_mapa{
@@ -244,6 +260,7 @@ p{
   .container_mapa{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     padding: 0 12px;
   }
@@ -258,23 +275,25 @@ p{
     margin-inline: auto;
   }
 
-.seletor {
-  display: flex;
+  .seletor {
+    display: flex;
     margin-left: 0;
     margin-right: 0;
     width: 100%;
     margin-top: 20px;
     text-align: center;
     flex-direction: row;
-    gap: 10px;
+    justify-content: space-evenly;
+    gap: 20px;
+    align-items: center;
   }
 
   .meses{
-    margin: auto;
+    margin: 0;
   }
 
   .data{
-    margin: auto;
+    margin: 0;
   }
 
   .container_footer{
@@ -299,25 +318,18 @@ p{
     margin: left;
   }
 
-  .apoio_footer{
-    
+  .mapa_inmet{
+    width: 80%; /* deixa uma folga nas laterais */
+    height: auto;
+    margin-top: 20px;
+    margin-left: 0;           /* anula a margin-left:100px do desktop */
+    margin-right: 0;
+    margin-inline: auto;
   }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-.legenda {
+  .legenda {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
     background: white;
@@ -340,6 +352,36 @@ p{
 }
 
 
+.container_mapa_inmet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+}
+
+/* wrapper interno que animaremos */
+.mapa-wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 0px;                 /* inicia colapsado */
+  overflow: hidden;            /* esconde a imagem até expandir (faz o "empurrar") */
+  transition: height 100ms ease; /* ajuste a duração se quiser */
+}
+
+/* imagem responsiva dentro do wrapper */
+.mapa-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
 /* ================================== */
 /* ESTILOS PARA TELAS PEQUENAS */
 /* ================================== */
@@ -349,6 +391,7 @@ p{
 
   .container_mapa{
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     padding: 0 12px;
   }
@@ -364,16 +407,17 @@ p{
   }
 
 .seletor {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 0px;
+    margin-right: 0px;
     width: 100%;
     margin-top: 20px;
     text-align: center;
   }
 
-  .butao{
-    width: 100%;;
-  }
+
+
+
+
 
   .contatos_main{
   padding: 20px;
@@ -381,12 +425,33 @@ p{
 }
 
 .main_home{
-background-color: ;
 padding-left: 0;
 padding-right: 0;
 width: 100%;
 background-color: #f4f4f4;
+}
 
+.main_inmet{
+ padding-left: 0;
+ padding-right: 0;
+ width: 100%;
+ background-color: #f4f4f4;
+}
+
+.sobre_main{
+ background-color: ;
+ padding-left: 0;
+ padding-right: 0;
+ width: 100%;
+ background-color: #f4f4f4;
+}
+
+.contatos_main{
+  background-color: ;
+ padding-left: 0;
+ padding-right: 0;
+ width: 100%;
+ background-color: #f4f4f4; 
 }
 
 header{
@@ -434,5 +499,24 @@ footer.footer {
   text-decoration:underline;
   margin-left: 40px;
 }
+
+
+}
+
+@media (max-width: 900px) {
+
+.mapa_inmet{
+    width: 100%; /* deixa uma folga nas laterais */
+    height: auto;
+    margin-top: 20px;
+    margin-left: 0;           /* anula a margin-left:100px do desktop */
+    margin-right: 0;
+    margin-inline: auto;
+}
+
+.butao{
+  margin-right: 20px;
+}
+
 
 }
