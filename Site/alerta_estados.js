@@ -3,6 +3,8 @@ import * as mi from "./mapa_interativo.js";
 export const SPI_LIMIAR_AVISO = 1.6;
 const RAIO_MARCADOR = 0.3;
 
+const MARCADOR_TAMANHO = 30;
+
 let check_pagina_carregada = new Promise((resolve, reject) => {
     let check_intervalo = setInterval(() => {
         if (document.readyState === "complete") {
@@ -12,6 +14,26 @@ let check_pagina_carregada = new Promise((resolve, reject) => {
     }, 20);
 });
 await check_pagina_carregada;
+
+var alerta_chuva_extrema = L.icon({
+    iconUrl:"img/marker_chuva_extrema.png",
+    iconSize:[MARCADOR_TAMANHO,MARCADOR_TAMANHO]
+});
+
+var alerta_chuva_excepcional = L.icon({
+    iconUrl:"img/marker_chuva_excepcional.png",
+    iconSize:[MARCADOR_TAMANHO,MARCADOR_TAMANHO]
+});
+
+var alerta_seca_extrema = L.icon({
+    iconUrl:"img/marker_seca_extrema.png",
+    iconSize:[MARCADOR_TAMANHO,MARCADOR_TAMANHO]
+});
+
+var alerta_seca_excepcional = L.icon({
+    iconUrl:"img/marker_seca_excepcional.png",
+    iconSize:[MARCADOR_TAMANHO,MARCADOR_TAMANHO]
+});
 
 function distancia_pontos(lon1, lat1, lon2, lat2){
     return Math.sqrt(Math.pow(lon1-lon2,2) + Math.pow(lat1-lat2,2));
@@ -86,6 +108,12 @@ export function analisar_estados(dados){
     return estados_alerta;
 }
 
+function click_alerta() {
+    console.log("Oi");
+    let area_texto = document.getElementById("info_alerta");
+    area_texto.innerHTML += "oi";
+}
+//fiquei sem saco
 export function adicionar_sinais(estados){
     let marcadores_seca = [];
     let marcadores_chuva = [];
@@ -96,20 +124,54 @@ export function adicionar_sinais(estados){
         let isolado = true;
         let removido = false;
         marcadores_seca.forEach(marcador =>{
-            if(distancia_pontos(lon, lat, marcador.getLatLng().lng, marcador.getLatLng().lat) < RAIO_MARCADOR){
-                removido = true;
+            if(distancia_pontos(lon, lat, marcador.getLatLng().lng, marcador.getLatLng().lat) < RAIO_MARCADOR && !removido){
                 isolado = false;
+                removido = true;
+                marcador.estados.push(estado.properties.name);
             }
+
         })
         if(isolado){
-            let marcador_atual = L.marker([lat, lon], {icon: mi.alerta}).addTo(mi.mapa)
             if(estado.spi_min > -2){
+                let marcador_atual = L.marker([lat, lon], {icon: alerta_seca_extrema}).addTo(mi.mapa);
+                marcador_atual.estados = [];
+                marcador_atual.estados.push(estado.properties.name);
+                marcador_atual.on("click", () => {
+                    let area_texto = document.getElementById("info_alerta");
+                    area_texto.innerHTML = `
+                    <img src="img/marker_seca_extrema.png" width="100px" height="100px" style="
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;"></img><br>
+                    Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
+                    Situação: Seca extrema<br>
+                    SPI na região: ${estado.spi_min.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados}
+                    `;
+                });
                 marcador_atual.bindTooltip("Seca extrema");
+                marcadores_seca.push(marcador_atual);
             }
             else{
+                let marcador_atual = L.marker([lat, lon], {icon: alerta_seca_excepcional}).addTo(mi.mapa);
+                marcador_atual.estados = [];
+                marcador_atual.estados.push(estado.properties.name);
                 marcador_atual.bindTooltip("Seca excepcional");
+                marcador_atual.on("click", () => {
+                    let area_texto = document.getElementById("info_alerta");
+                    area_texto.innerHTML = `
+                    <img src="img/marker_seca_excepcional.png" width="100px" height="100px" style="
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;"></img><br>
+                    Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
+                    Situação: Seca excepcional<br>
+                    SPI na região: ${estado.spi_min.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados}
+                    `;
+                });
+                marcadores_seca.push(marcador_atual);
             }
-            marcadores_seca.push(marcador_atual);
         }
     });
 
@@ -118,22 +180,60 @@ export function adicionar_sinais(estados){
         let lon = mi.LONGITUDE_MIN + (mi.ARESTA/2)*estado.geometry.ponto_maximo[0];
         let lat = mi.LATITUDE_MIN + (mi.ARESTA/2)*estado.geometry.ponto_maximo[1];
         let isolado = true;
+        let removido = false;
         marcadores_chuva.forEach(marcador =>{
             marcador.marcadores_removidos = [];
-            if(distancia_pontos(lon, lat, marcador.getLatLng().lng, marcador.getLatLng().lat) < RAIO_MARCADOR){
+            if(distancia_pontos(lon, lat, marcador.getLatLng().lng, marcador.getLatLng().lat) < RAIO_MARCADOR && !removido){
                 isolado = false;
+                removido = true;
+                marcador.estados.push(estado.properties.name);
+
             }
         })
         if(isolado){
-            let marcador_atual = L.marker([lat, lon], {icon: mi.alerta}).addTo(mi.mapa);
             if(estado.spi_max < 2){
+                let marcador_atual = L.marker([lat, lon], {icon: alerta_chuva_extrema}).addTo(mi.mapa);
+                marcador_atual.estados = [];
+                marcador_atual.estados.push(estado.properties.name);
                 marcador_atual.bindTooltip("Chuva extrema");
+                marcador_atual.on("click", () => {
+                    let area_texto = document.getElementById("info_alerta");
+                    area_texto.innerHTML = `
+                    <img src="img/marker_chuva_extrema.png" width="100px" height="100px" style="
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;"></img><br>
+                    Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
+                    Situação: Chuva extrema<br>
+                    SPI na região: ${estado.spi_max.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados}
+                    `;
+                });
+                marcadores_chuva.push(marcador_atual);
             }
             else{
+                let marcador_atual = L.marker([lat, lon], {icon: alerta_chuva_excepcional}).addTo(mi.mapa);
+                marcador_atual.estados = [];
+                marcador_atual.estados.push(estado.properties.name);
                 marcador_atual.bindTooltip("Chuva excepcional");
+                marcador_atual.on("click", () => {
+                    let area_texto = document.getElementById("info_alerta");
+                    area_texto.innerHTML = `
+                    <img src="img/marker_chuva_excepcional.png" width="100px" height="100px" style="
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;"></img><br>
+                    Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
+                    Situação: Chuva excepcional<br>
+                    SPI na região: ${estado.spi_max.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados}
+                    `;
+                });
+                marcadores_chuva.push(marcador_atual);
             }
-            marcadores_chuva.push(marcador_atual);
         }
     });
 }
+
+
 

@@ -45,7 +45,7 @@ let dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => ne
 var legenda = L.control({position: 'bottomright'});
 legenda.onAdd =  ()=> {
     var div = L.DomUtil.create('div', 'legenda'),
-    grades = [" > 2", "> 1.6", "> 1.3", "> 0.8", "> 0.5", "< -0.5", "< -0.8", "< -1.3", "< -1.6", "< -2"],
+    grades = [" Chuva excepcional", "Chuva extrema", "Chuva grave", "Chuva moderada", "Chuva fraca", "Seca fraca", "Seca moderada", "Seca grave", "Seca extrema", "Seca excepcional"],
     cores = [CHUVA_EXCEPCIONAL, CHUVA_EXTREMA, CHUVA_GRAVE, CHUVA_MODERADA, CHUVA_FRACA, SECA_FRACA, SECA_MODERADA, SECA_GRAVE, SECA_EXTREMA, SECA_EXCEPCIONAL];
     div.innerHTML += "Legenda SPI/SPEI:<br>"
     for (var i = 0; i < grades.length; i++) {
@@ -236,6 +236,7 @@ botao_gerar.onclick = async () => {
         return;
     }
 
+    document.getElementById("info_alerta").innerHTML = "";
     //gerar coloração no mapa
     botao_gerar.disabled = true;
     dados = await lj.pescar_dados(input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
