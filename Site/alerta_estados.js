@@ -94,8 +94,10 @@ export function adicionar_sinais(estados){
         let lon = mi.LONGITUDE_MIN + (mi.ARESTA/2)*estado.geometry.ponto_minimo[0];
         let lat = mi.LATITUDE_MIN + (mi.ARESTA/2)*estado.geometry.ponto_minimo[1];
         let isolado = true;
-        marcadores_seca.every(marcador =>{
+        let removido = false;
+        marcadores_seca.forEach(marcador =>{
             if(distancia_pontos(lon, lat, marcador.getLatLng().lng, marcador.getLatLng().lat) < RAIO_MARCADOR){
+                removido = true;
                 isolado = false;
             }
         })
