@@ -80,7 +80,7 @@ botao_puxar.onclick = async () => {
   const ok = await imgLoadPromise;
 
 
-  wrapper.style.transition = 'height 1000ms ease';
+  wrapper.style.transition = 'height 800ms ease';
 
   setTimeout(() => {
     const targetHeight = mapa_inmet.getBoundingClientRect().height;
