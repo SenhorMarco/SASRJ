@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,61 +9,61 @@
 </head>
 
 
-<header class="home">
-    <div class="off-screen-menu">
-        <div class="home_div" style="align-items: center;"><a href="index.html">Home</a></div>
-        <div class="inmet_div"><a href="inmet.html">INMET</a></div>
-        <div class="sobre_div"><a href="sobre.html">Sobre</a></div>
-        <div class="contatos_div"><a href="contatos.html">Contatos</a></div>
-        <div class="inscrever_div"><a href="inscrever.php"
-                style="text-decoration: underline; color: rgba(255, 255, 3, 0.729);">Inscreva&#8209se</a></div>
-    </div>
-
-
-
-
-
+<header class="site-header">
     <div class="container">
-        <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;">
-            <div style="display: flex; flex-direction: column;"><img src="img/SAS-RJ_logo.png" alt="SAS/RJ"
-                    style="width: 30px;"></div>
-            <div class="logo">Sistema de Alertas de Seca RJ - SAS/RJ</div>
-        </div>
-        <div class="menu">
-            <nav>
-                <div class="naveg">
-                    <div class="home_div"><a href="index.html">Home</a></div>
-                    <div class="inmet_div"><a href="inmet.html">INMET</a></div>
-                    <div class="sobre_div"><a href="sobre.html">Sobre</a></div>
-                    <div class="contatos_div"><a href="contatos.html">Contatos</a></div>
-                    <div class="inscrever_div"><a href="inscrever.php" class="inscrever"
-                            style="text-decoration: underline;">Inscreva&#8209se</a></div>
-                </div>
-            </nav>
-        </div>
+        <a href="index.html" class="logo-container"> <img src="img/SAS-RJ_logo.png" alt="SAS/RJ Logo">
+            <span class="logo-text">SAS/RJ</span>
+        </a>
 
-        <nav class="menu-ham">
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-home">Home</a></li>
+                <li><a href="inmet.html" class="nav-inmet">INMET</a></li>
+                <li><a href="sobre.html" class="nav-sobre">Sobre</a></li>
+                <li><a href="contatos.html" class="nav-contatos">Contatos</a></li>
+                <li><a href="inscrever.php" class="highlight nav-inscrever">Inscreva-se</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-ham-button" aria-label="Toggle Menu">
             <div class="ham-menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-        </nav>
+        </button>
     </div>
 </header>
+
+<nav class="off-screen-menu">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="inmet.html" class="nav-inmet">INMET</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
+    <a href="contatos.html" class="nav-contatos">Contatos</a>
+    <a href="inscrever.php" class="highlight nav-inscrever">Inscreva-se</a>
+</nav>
 
 
 <body>
 
-    <main class="contatos_main">
-        Olá eu sou um texto temporário e o davi braga/brasil vai escrever um texto bem legal aqui ainda
-        <br>
-        <form action="inscrever.php" method="POST">
-            <label for="input_email">Insira seu e-mail: </label>
-            <input type="email" id="input_email" name="email" required/>
-            <input id="registrar" type="submit" value="Registrar e-mail">
+    <main>
+        <div class="container section-padding">
+
+            <h1>Inscreva-se para Alertas</h1>
+            <p>Receba notificações sobre as condições de seca na sua região de interesse.</p>
+
+        <form id="inscrever.php" class="subscribe-form" method="POST">
+        <div class="control-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        </div>
+            <div class="control-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+            </div>
+        <div class="form-feedback" id="form-feedback" style="margin-top: 20px;"></div> <button type="submit" class="button">Inscrever</button>
         </form>
-        
+
         <?php
         $servername = getenv("USUARIOS_HOST");
         $username = getenv("USUARIOS_USER");
@@ -99,55 +98,76 @@
             }
         }
         catch(PDOException $e) {
-            echo "E-mail j� registrado!";
+            echo "E-mail j� registrado!";
         }
         $conexao = null;
         ?>
+        
+        </div>
     </main>
 
-    <footer class="footer">
-        <div class="container_footer">
-
-            <!-- <div class="navegação_footer">
-    <p style="margin: auto;">Mapa do site</p>
-    <a href="index.html" class="footer_nav">Home</a>
-    <a href="sobre.html" class="footer_nav">Sobre</a>
-    <a href="contatos.html" class="footer_nav">Contatos</a>
-    <a href="inmet.html" class="footer_nav">INMET</a>
-</div> -->
-
-
-            <div class="apoio_footer">
-
-                <p style="text-decoration: solid; text-decoration: underline; text-align: center;">Apoio:</p>
-                <div style="display: flex; flex-direction: row;">
-                    <div><img src="img/ime_logo.png" alt="Logo do IME" style="width: 50px;"></div>
-                    <div style="margin: auto; color: black;">Instituto Militar de Engenharia</div>
-                </div>
-
-
-                <p style="text-decoration: solid; text-decoration: underline; margin-bottom: 10px; text-align: center;">
-                    Créditos:</p>
-                <div style="display: flex; flex-direction: row; gap: 15px;">
-                    <div><img src="img/inmet_logo.png" alt="Logo do Inmet" style="width: 40px; border-radius: 8px;">
-                    </div>
-                    <div style="margin: auto; color: black;">Instituto Nacional de Metereologia</div>
-                </div>
-
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-support">
+            <p>Apoio:</p>
+            <div class="footer-logo-group">
+                <img src="img/ime_logo.png" alt="Logo do IME">
+                <span>Instituto Militar de Engenharia</span>
             </div>
-
         </div>
+        <div class="footer-credits">
+            <p>Créditos dos Dados:</p>
+            <div class="footer-logo-group">
+                 <img src="img/inmet_logo.png" alt="Logo do Inmet">
+                 <span>Instituto Nacional de Meteorologia</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> SAS/RJ. Todos os direitos reservados.</p>
+    </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
-        <br>
-        <hr> <br>
+<script>
+    // Add active class to current page link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a, .off-screen-menu a');
 
-        Todos os direitos reservados.
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop() || 'index.html';
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+<script src="menu-hamburguer.js"></script>
 
-    </footer>
+
+<script>
+// Add this in a <script> tag at the bottom of inscrever.html
+document.getElementById('subscribe-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent actual form submission
+    const feedback = document.getElementById('form-feedback');
+    // Basic validation example
+    const email = document.getElementById('email').value;
+    if (email && email.includes('@')) {
+         feedback.textContent = 'Inscrição enviada com sucesso! (Funcionalidade de backend não implementada)';
+         feedback.className = 'form-feedback success';
+         this.reset(); // Clear the form
+    } else {
+         feedback.textContent = 'Por favor, insira um email válido.';
+         feedback.className = 'form-feedback error';
+    }
+});
+</script>
+
+
+
 
 </body>
-
-<script src="menu-hamburguer.js"></script>
 
 
 
