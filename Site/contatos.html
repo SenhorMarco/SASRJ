@@ -9,47 +9,45 @@
 </head>
 
 
-<header class="home">
-    <div class="off-screen-menu">
-        <div class="home_div" style="align-items: center;"><a href="index.html">Home</a></div>
-        <div class="inmet_div"><a href="inmet.html">INMET</a></div>
-        <div class="sobre_div"><a href="sobre.html">Sobre</a></div>
-        <div class="contatos_div"><a href="contatos.html" style="text-decoration: underline;">Contatos</a></div>
-        <div class="inscrever_div"><a href="inscrever.html" style="color: rgba(255, 255, 3, 0.729);">Inscreva&#8209se</a></div>
-    </div>
-
-
-
-
-
+<header class="site-header">
     <div class="container">
-        <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;"><div style="display: flex; flex-direction: column;"><img src="img/SAS-RJ_logo.png" alt="SAS/RJ" style="width: 30px;"></div><div class="logo">Sistema de Alertas de Seca RJ - SAS/RJ</div></div>
-        <div class="menu">
-            <nav>
-                <div class="naveg">
-                <div class="home_div"><a href="index.html">Home</a></div>
-                <div class="inmet_div"><a href="inmet.html">INMET</a></div>
-                <div class="sobre_div"><a href="sobre.html">Sobre</a></div>
-                <div class="contatos_div"><a href="contatos.html" class="contatos">Contatos</a></div>
-                <div class="inscrever_div"><a href="inscrever.html" class="inscrever">Inscreva&#8209se</a></div>
-                </div>
-            </nav>
-        </div>
+        <a href="index.html" class="logo-container"> <img src="img/SAS-RJ_logo.png" alt="SAS/RJ Logo">
+            <span class="logo-text">SAS/RJ</span>
+        </a>
 
-    <nav class="menu-ham">
-        <div class="ham-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-    </nav>
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-home">Home</a></li>
+                <li><a href="inmet.html" class="nav-inmet">INMET</a></li>
+                <li><a href="sobre.html" class="nav-sobre">Sobre</a></li>
+                <li><a href="contatos.html" class="nav-contatos">Contatos</a></li>
+                <li><a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-ham-button" aria-label="Toggle Menu">
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
     </div>
 </header>
+
+<nav class="off-screen-menu">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="inmet.html" class="nav-inmet">INMET</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
+    <a href="contatos.html" class="nav-contatos">Contatos</a>
+    <a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a>
+</nav>
 
 
 <body>
 
-    <main class="contatos_main">
+    <main>
+        <div class="container section-padding">
 
         
         <u><h2 style="font-size: 30px;">FAQ - <i>Frequently Asked Questions</i></h2></u>
@@ -71,47 +69,52 @@
             </ul>
             <br>
             <p>Ou escreva diretamente sua dúvida/reclamação abaixo:</p>
-            <br>
-            <div class="caixa_SAC">
-            <form id="botao" action="#"><textarea name="SAC" placeholder="Deixe seu comentário aqui..." rows="7" style="width: 60%;"></textarea><button type="button" onclick="virus()">Enviar</button></form></div>
+            <form id="contact-form" class="contact-form" style="margin-top: 0px; margin-top: var(--spacing-md); display: flex; flex-direction: column; align-items: center;" action="#"><textarea name="SAC" placeholder="Deixe seu comentário aqui..." rows="7" style="width: 100%; max-width: 600px; padding: var(--spacing-sm); border: 1px solid var(--border-color); border-radius: var(--border-radius); margin-bottom: var(--spacing-md); display: block;"></textarea><button type="button" class="button" style="margin: auto;">Enviar</button></form>
+    
+    
+    </div>
     </main>
 
-<footer class="footer">
-<div class="container_footer">
-
-<!-- <div class="navegação_footer">
-    <p style="margin: auto;">Mapa do site</p>
-    <a href="index.html" class="footer_nav">Home</a>
-    <a href="sobre.html" class="footer_nav">Sobre</a>
-    <a href="contatos.html" class="footer_nav">Contatos</a>
-    <a href="inmet.html" class="footer_nav">INMET</a>
-</div> -->
-
-
-<div class="apoio_footer">
-
-    <p style="text-decoration: solid; text-decoration: underline; text-align: center;">Apoio:</p>
-    <div style="display: flex; flex-direction: row;"><div><img src="img/ime_logo.png" alt="Logo do IME" style="width: 50px;"></div> <div style="margin: auto; color: black;">Instituto Militar de Engenharia</div></div>
-
-
-    <p style="text-decoration: solid; text-decoration: underline; margin-bottom: 10px; text-align: center;">Créditos:</p>
-    <div style="display: flex; flex-direction: row; gap: 15px;"><div><img src="img/inmet_logo.png" alt="Logo do Inmet" style="width: 40px; border-radius: 8px;"></div> <div style="margin: auto; color: black;">Instituto Nacional de Metereologia</div></div>
-
-</div>
-
-</div> 
-
-<br> <hr> <br>
-
-Todos os direitos reservados.
-
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-support">
+            <p>Apoio:</p>
+            <div class="footer-logo-group">
+                <img src="img/ime_logo.png" alt="Logo do IME">
+                <span>Instituto Militar de Engenharia</span>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>Créditos dos Dados:</p>
+            <div class="footer-logo-group">
+                 <img src="img/inmet_logo.png" alt="Logo do Inmet">
+                 <span>Instituto Nacional de Meteorologia</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> SAS/RJ. Todos os direitos reservados.</p>
+    </div>
 </footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
-</body>
+<script>
+    // Add active class to current page link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a, .off-screen-menu a');
 
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop() || 'index.html';
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 <script src="menu-hamburguer.js"></script>
 
 
-
+</body>
 
 </html>
