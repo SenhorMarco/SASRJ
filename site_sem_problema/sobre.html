@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAS/RJ Sobre</title>
+    <link rel="icon" href="img/SAS-RJ_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<header class="site-header">
+    <div class="container">
+        <a href="index.html" class="logo-container"> <img src="img/SAS-RJ_logo.png" alt="SAS/RJ Logo">
+            <span class="logo-text">SAS/RJ</span>
+        </a>
+
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-home">Home</a></li>
+                <li><a href="inmet.html" class="nav-inmet">INMET</a></li>
+                <li><a href="sobre.html" class="nav-sobre">Sobre</a></li>
+                <li><a href="contatos.html" class="nav-contatos">Contatos</a></li>
+                <li><a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-ham-button" aria-label="Toggle Menu">
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+</header>
+
+<nav class="off-screen-menu">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="inmet.html" class="nav-inmet">INMET</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
+    <a href="contatos.html" class="nav-contatos">Contatos</a>
+    <a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a>
+</nav>
+
+
+<body>
+    <main>
+        <div class="container section-padding">
+        <h3 class="titulo_sobre" style="margin-top: 10px; margin-bottom: 8px;">O que é o SAS/RJ?</h3>
+        <p>O Sistema de Alertas de Secas para o Estado do Rio de Janeiro é um monitor de secas e funciona como um processo de acompanhamento regular e períodico da seca no estado do Rio, cujos resultados consolidados são divulgados por meio de um mapa que pode ser encontrado na seção <a href="index.html">Home</a> e por meio de alertas via e-mail para aqueles que se inscreverem no site. O mapa é mensal e apresenta a situação da seca nas regiões do estado, assim como as regiões que não foram afetadas pelo fenômeno.</p>
+        <p>Nos locais com seca, o Monitor mostra, com uma escala de cores, o grau de severidade da seca, que pode ser: fraca, moderada, grave, extrema ou excepcional.</p>
+        <p>Para aqueles que se inscreverem pelo site, ao cadastrar uma região de interesse, receberão alertas em caso de secas na região.</p>
+
+        <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px;">Como são calculados os índices de seca?</h3>
+        <p>Para a confecção dos mapas são usados dois tipos de índice, comumente utilizados como parâmetros para medição de secas, o SPI - Standard Precipitation Índex (traduzido como Índice de Precipitação Padronizado) e o SPEI - Standardized Precipitation-Evapotranspiration Index (traduzido como Índice Padronizado de Precipitação e Evapotranspiração). Ambos podem ser consultados para o período de 1, 3 ou 6 meses. Para mais informações sobre o SPI consulte o site do <a href="https://clima.cptec.inpe.br/spi/pt" target="_blank">CPET</a>, e para mais informações sobre o SPEI consulte o site da <a href="https://www.droughtmanagement.info/standardized-precipitation-evapotranspiration-index-spei/" target="_blank">World Meteorological Organization</a> (em inglês).</p>
+
+        <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px;">Por que um Mapa de Secas é importante?</h3>
+        <p>O estado do Rio de Janeiro sofre períodos de estiagem que impactam agricultura, abastecimento público e ecossistemas. Monitorar secas permite planejamento mais eficiente de uso de água e prevenção de impactos socioeconômicos.</p>
+
+        <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px;">Sobre o projeto SAS/RJ</h3>
+        <p>O projeto SAS/RJ foi desenvolvido pelos alunos do IME (Instituto Militar de Engenharia) <a href="#" target="_blank">Davi Braga</a>, Marco Kossooski, Eduardo Palos, Davi Brasil e Brenno Zanandrea, orientados pela Profª Raquel Aguiar, em parceria com a Defesa Civil do Rio de Janeiro, a fim de auxiliar na prevenção de problemas relacionados ao fenômeno da seca no estado.</p>
+        
+</div>
+    </main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-support">
+            <p>Apoio:</p>
+            <div class="footer-logo-group">
+                <img src="img/ime_logo.png" alt="Logo do IME">
+                <span>Instituto Militar de Engenharia</span>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>Créditos dos Dados:</p>
+            <div class="footer-logo-group">
+                 <img src="img/inmet_logo.png" alt="Logo do Inmet">
+                 <span>Instituto Nacional de Meteorologia</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> SAS/RJ. Todos os direitos reservados.</p>
+    </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+
+<script>
+    // Add active class to current page link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a, .off-screen-menu a');
+
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop() || 'index.html';
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+<script src="menu-hamburguer.js"></script>
+
+</body>
+
+
+</html>
