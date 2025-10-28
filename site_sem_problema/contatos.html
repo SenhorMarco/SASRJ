@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAS/RJ Contatos</title>
+    <link rel="icon" href="img/SAS-RJ_logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<header class="site-header">
+    <div class="container">
+        <a href="index.html" class="logo-container"> <img src="img/SAS-RJ_logo.png" alt="SAS/RJ Logo">
+            <span class="logo-text">SAS/RJ</span>
+        </a>
+
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-home">Home</a></li>
+                <li><a href="inmet.html" class="nav-inmet">INMET</a></li>
+                <li><a href="sobre.html" class="nav-sobre">Sobre</a></li>
+                <li><a href="contatos.html" class="nav-contatos">Contatos</a></li>
+                <li><a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-ham-button" aria-label="Toggle Menu">
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+</header>
+
+<nav class="off-screen-menu">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="inmet.html" class="nav-inmet">INMET</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
+    <a href="contatos.html" class="nav-contatos">Contatos</a>
+    <a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a>
+</nav>
+
+
+<body>
+
+    <main>
+        <div class="container section-padding">
+
+        
+        <u><h2 style="font-size: 30px;">FAQ - <i>Frequently Asked Questions</i></h2></u>
+            <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px; font-size: 19px;">1. O mapa de secas é uma previsão de secas?</h3>
+            <p><b>NÃO!</b> O mapa de secas <b>não</b> é uma previsão de secas, ele mostra a situação atual das secas no estado do Rio de Janeiro.</p>
+            <p>A principal diferença entre monitoramento e previsão está no foco temporal. O monitoramento analisa o presente e o passado para compreender o que já ocorreu e o que está acontecendo agora. Em contrapartida, a previsão utiliza esses dados para estimar o que provavelmente acontecerá no futuro.</p>
+
+            <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px; font-size: 19px;">2. Qual é a precisão do monitor de secas? Ele consegue dizer exatamente como está a seca no meu bairro?</h3>
+            <p>A precisão do Monitor de Secas está diretamente ligada à qualidade dos dados de monitoramento e validação fornecidos por seus colaboradores. Em outras palavras, a exatidão do mapa é um reflexo da robustez da rede de coleta de informações.</p>
+
+
+
+        <u><h2 class="SAC" style="margin-top: 40px; font-size: 30px;">SAC - Serviço de Atendimento ao Cliente</h2></u>
+        <br>
+            <p>Nosso atendimento ao cliente é feito por meio de nossos canais:
+            </p>
+            <ul style="padding-left: 20px;">
+            <li>E-mail: <a href="mailto:sas.rj@gmail.com">sas.rj@gmail.com</a></li>
+            </ul>
+            <br>
+            <p>Ou escreva diretamente sua dúvida/reclamação abaixo:</p>
+            <form id="contact-form" class="contact-form" style="margin-top: 0px; margin-top: var(--spacing-md); display: flex; flex-direction: column; align-items: center;" action="#"><textarea name="SAC" placeholder="Deixe seu comentário aqui..." rows="7" style="width: 100%; max-width: 600px; padding: var(--spacing-sm); border: 1px solid var(--border-color); border-radius: var(--border-radius); margin-bottom: var(--spacing-md); display: block;"></textarea><button type="button" class="button" style="margin: auto;">Enviar</button></form>
+    
+    
+    </div>
+    </main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-support">
+            <p>Apoio:</p>
+            <div class="footer-logo-group">
+                <img src="img/ime_logo.png" alt="Logo do IME">
+                <span>Instituto Militar de Engenharia</span>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>Créditos dos Dados:</p>
+            <div class="footer-logo-group">
+                 <img src="img/inmet_logo.png" alt="Logo do Inmet">
+                 <span>Instituto Nacional de Meteorologia</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> SAS/RJ. Todos os direitos reservados.</p>
+    </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+
+<script>
+    // Add active class to current page link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a, .off-screen-menu a');
+
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop() || 'index.html';
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+<script src="menu-hamburguer.js"></script>
+
+
+</body>
+
+</html>
