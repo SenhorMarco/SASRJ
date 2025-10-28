@@ -1,654 +1,552 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap');
 
+/* --- CSS Variables (Customize Colors Here) --- */
+:root {
+  --primary-color: #0d47a1; /* Deep Blue */
+  --secondary-color: #1565c0; /* Medium Blue */
+  --accent-color: #ff9800; /* Orange/Amber for buttons/highlights */
+  --light-bg: #f8f9fa; /* Off-white background */
+  --dark-bg: #e9ecef; /* Light gray background for sections */
+  --text-color: #212529; /* Dark gray text */
+  --light-text: #f8f9fa; /* Light text for dark backgrounds */
+  --border-color: #dee2e6; /* Light gray border */
+  --danger-color: #dc3545; /* Red for potential future error states */
+  --success-color: #28a745; /* Green for potential future success states */
 
-/* ================================== */
-/* ESTILOS PARA TELAS GRANDES (DESKTOP) */
-/* ================================== */
+  --font-main: 'Roboto', sans-serif;
+  --font-headings: 'Lato', sans-serif;
 
-header{
-  margin: auto;
-  margin-bottom: 15px;
-  padding: 15px;
-  background-color: #B74134;
-  width: 80%;
-  margin-top: 8px;
-  border-radius: 8px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  --border-radius: 6px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* html{
-    height: 100%;
-} */
+/* --- Reset & Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Faz o body ocupar a altura inteira e empurra o footer para baixo */
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
-  background-image: url('/img/old.webp');
-  background-attachment: fixed;
-  background-position: center;
-}
-
-.main_home{
-  margin: auto;
-  width: 80%;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-}
-
-.container{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: center;
-    
-}
-
-.logo{
-    left: 20px;
-    font-family: fantasy;
-    color: azure;
-}
-
-
-.naveg{
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  margin: auto;
-}
-
-.menu nav a{
-    color: aliceblue;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.menu nav a.inscrever{
-    color: rgba(255, 255, 3, 0.729);
-    padding-right: 0;
-}
-
-
-.menu nav a.home{
-    text-decoration: underline;
-}
-
-.menu nav a.contatos{
-    text-decoration: underline;
-    margin: auto;
-}
-
-.menu nav a.sobre{
-    text-decoration: underline;
-}
-
-.menu nav a.inmet{
-    text-decoration: underline;
-}
-
-footer.footer {
-  margin: auto;
-  position: static;    /* NÃO fixed */
-  width: 80%;
-  background-color: #B74134;
-  color: aliceblue;
-  padding: 0.5%;
-  padding-bottom: 15px;
-  padding-top: 15px;
-  text-align: center;
-  border-radius: 8px;
-
-  margin-bottom: 10px;
-
-  /* Espaço entre o fim do main e o footer (ajuste o valor se quiser mais/menos) */
-  margin-top: 10px;
-}
-
-li{
-    list-style-type: circle;
-}
-
-.contatos_main{
-  margin: auto;
-  width: 80%;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-    
-}
-
-.caixa_SAC{
-    text-align: center;
-}
-
-main{
-    padding: 20px;
-    flex: 1 0 auto;
-}
-
-.sobre_main{
-  margin: auto;
-  width: 80%;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-}
-
-
-.titulo_sobre{
-    color: rgb(15, 111, 167);
-}
-
-p{
-    font-size: 15px;
-    text-align: justify;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* .container_mapa{
-    display: flex;
-    gap: 40px;
-    margin: auto;
-    margin-left: 10px;
-    margin-right: 10px
-} */
-
-.butao{
-  /* --- Adicione estas 3 linhas --- */
-  display: flex;
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-
-  /* Estilos básicos que você já pode ter */
-  background-color: #c0392b; /* Um vermelho mais sóbrio */
-  color: white;
-  padding: 10px;
-  width: 20%;
-  border: none;
-  border-radius: 8px; /* Cantos um pouco mais arredondados */
-  /* font-family: 'Montserrat', sans-serif; Usando a fonte que sugerimos */
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: var(--light-bg);
+  line-height: 1.6;
   font-size: 16px;
-  font-weight: bold;
+  /* Optional: Keep or replace background image, make it subtle */
+  /* background-image: url('/img/rio-background-subtle.webp'); */
+  /* background-attachment: fixed; */
+  /* background-position: center; */
+  /* background-size: cover; */
+}
+
+main {
+  flex: 1 0 auto; /* Pushes footer down */
+  width: 100%;
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Remove underline on logo container hover */
+.logo-container:hover {
+  text-decoration: none;
+}
+
+/* Apply underline ONLY to logo text on container hover */
+.logo-container:hover .logo-text {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-headings);
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+  line-height: 1.3;
+}
+
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.4rem; }
+
+p {
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+
+
+.page-title {
+  font-size: 2rem;
+  color: var(--primary-color);
   text-align: center;
+  margin-bottom: var(--spacing-md); /* Margem menor para ficar perto da borda */
+  padding-bottom: var(--spacing-sm); /* Espaço entre texto e borda */
+  border-bottom: 1px solid var(--border-color); /* Linha separadora cinza claro */
+  font-weight: 700;
+  line-height: 1.3;
+}
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+   .page-title {
+     font-size: 1.6rem;
+     margin-bottom: var(--spacing-sm);
+     padding-bottom: var(--spacing-xs);
+   }
+ }
+
+
+
+/* --- Utility Classes --- */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.section-padding {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+}
+
+.bg-dark {
+    background-color: var(--dark-bg);
+}
+
+/* --- Header --- */
+header.site-header { /* Renamed class for clarity */
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  padding: var(--spacing-sm) 0;
+  box-shadow: var(--box-shadow);
+  position: sticky; /* Optional: Make header sticky */
+  top: 0;
+  z-index: 1000000000;
+  width: 100%;
+}
+
+header.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container { /* Encapsulate logo and text */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-container img {
+    width: 40px; /* Slightly larger logo */
+    height: 40px;
+}
+
+.logo-text { /* Renamed class */
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--light-text);
+}
+
+/* Desktop Navigation */
+nav.main-nav .nav-links { /* Renamed classes */
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-lg);
+}
+
+nav.main-nav a {
+  color: var(--light-text);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+nav.main-nav a:hover,
+nav.main-nav a.active { /* Style for active page */
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+nav.main-nav a.highlight { /* Renamed 'inscrever' */
+  color: #fff; /* White */
+  background-color: var(--accent-color);
+  font-weight: 700;
+}
+nav.main-nav a.highlight:hover {
+    background-color: #e68a00; /* Darker orange */
+}
+
+
+/* --- Hamburger Menu & Off-Screen --- */
+.menu-ham-button { /* Renamed class */
+  display: none; /* Hidden on desktop */
   cursor: pointer;
-  margin-top: 0px;
-  box-shadow: 0 6px #999;
-  margin: 0;
-  margin-right: 5px;
+  padding: var(--spacing-sm);
+  background: none;
+  border: none;
+  z-index: 1001; /* Above header */
 }
 
-.butao:hover{
-  background-color: #d35400;
-}
-
-.butao:active{
-  box-shadow: 0 2px #666;
-  transform: translateY(4px);
-}
-
-
-.seletor_data{
-  padding: 5px 5px;
-  margin-top: 3px;
-  margin-bottom: 5px; 
-  width: auto;
-  max-width: 250px; 
-
-
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.seletor_meses{
-
-  padding: 5px 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: auto;
-  max-width: 250px;
-
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-/* .seletor{
-    margin: auto;
-    margin-left: 0px;
-    flex: 1;
-    text-align: center;
-}
-
-.mapa{
-    width: 600px;
-    height: 500px;
-    margin-top: 20px;
-    flex: 1.5;
-} */
-
-.main_inmet{
-  margin: auto;
-  width: 80%;
-  background-color: #f4f4f4;
-  border-radius: 10px;
+.ham-menu {
+  width: 30px;
+  height: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
-.titulo_mapa{
-  font-size: 30px;
-  margin-top: 15px;
-  text-decoration:underline;
-  margin-left: 25px;
+.ham-menu span {
+  display: block;
+  height: 3.3px;
+  width: 100%;
+  background-color: var(--light-text);
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
 
-  .container_mapa{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 0 12px;
-  }
+/* Hamburger animation */
+.ham-menu.active span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+.ham-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+.ham-menu.active span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
 
-  .mapa {
-    width: calc(100% - 24px); /* deixa uma folga nas laterais
-    height: 400px;            /* altura clara em telas pequenas */
-    min-height: 500px;
-    margin-top: 20px;
-    margin-left: 0;           /* anula a margin-left:100px do desktop */
-    margin-right: 0;
-    margin-inline: auto;
-  }
+.off-screen-menu {
+  position: fixed;
+  top: 55px;
+  /* Remove left/top positioning for initial state */
+  right: -100%; /* Começa fora da tela à direita */
+  width: 80%; /* Ou o valor que preferir, e.g., 300px */
+  max-width: 300px;
+  height: 100vh; /* Altura total da tela */
+  background-color: var(--primary-color);
+  padding: var(--spacing-xl) var(--spacing-md);
+  transition: right 0.3s ease-in-out; /* Anima a propriedade 'right' */
+  z-index: 100000009;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha links à esquerda dentro do menu */
+  gap: var(--spacing-md);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2); /* Sombra para a esquerda */
+}
 
-  .seletor {
-    display: flex;
-    margin-left: 0;
-    margin-right: 0;
+.off-screen-menu.active {
+  right: 0; /* Posição final: encostado à direita da tela */
+  /* display: flex; (já está na regra base) */
+  /* box-shadow está na regra base agora */
+}
+
+.off-screen-menu a {
+  color: var(--light-text);
+  font-size: 1.2rem;
+  padding: var(--spacing-sm) 0;
+  width: 100%;
+}
+
+.off-screen-menu a.highlight {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* --- Main Content Specific Styles --- */
+
+/* Shared styles for map pages */
+.map-page-container {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--box-shadow);
+    margin-bottom: var(--spacing-lg);
+}
+
+.controls-section { /* Container for selectors + button */
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: var(--spacing-md);
+  align-items: flex-end; /* Align items to bottom */
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.control-group { /* Group label and input */
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100px; /* Grow, shrink, base width */
+  min-width: 180px;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+/* Modern Form Elements */
+input[type="date"],
+select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: var(--font-main);
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="date"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.25); /* Focus ring */
+}
+
+/* Button */
+.button { /* General button class */
+  background-color: var(--accent-color);
+  color: #fff; /* White text on accent */
+  padding: calc(var(--spacing-sm) + 2px) var(--spacing-lg); /* Match input height better */
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-headings);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Prevent button from shrinking too much */
+}
+
+.button:hover {
+  background-color: #e68a00; /* Darker accent */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Loading Indicator (Initially hidden) */
+.loading-indicator {
+    display: none; /* Hidden by default, shown via JS */
+    text-align: center;
+    padding: var(--spacing-md);
+    font-style: italic;
+    color: var(--secondary-color);
+}
+/* Add a spinner later if desired */
+
+/* Map Containers */
+.map-container { /* Style for Leaflet/MapLibre map */
+    height: 500px; /* Default height, adjust as needed */
     width: 100%;
-    margin-top: 20px;
-    text-align: center;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .meses{
-    margin: 0;
-  }
-
-  .data{
-    margin: 0;
-  }
-
-  .container_footer{
-  display: flex; /* Transforma o container em um flex container */
-  justify-content:space-evenly; /*Joga as colunas para as pontas
-  align-items: flex-start; /* Alinha o topo das colunas, caso tenham alturas diferentes */ /* Adiciona um respiro interno */
-  gap: 15px;
-  margin-left: 5%;
-  margin-right: 5%;
-  }
-
-  .navegação_footer{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 5px;
-
-  }
-
-  .footer_nav{
-    color: black;
-    margin: left;
-  }
-
-  .mapa_inmet{
-    width: 80%; /* deixa uma folga nas laterais */
-    height: auto;
-    margin-top: 20px;
-    margin-left: 0;           /* anula a margin-left:100px do desktop */
-    margin-right: 0;
-    margin-inline: auto;
-  }
-
-
-
-  .legenda {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    margin: 0 0 5px;
-    color: #777;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.9;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-lg);
 }
 
-.legenda i {
-  width: 15px;
-  height: 15px;
-  float: left;
-  margin-right: 8px;
-  opacity: 0.9;
+/* INMET Map specific */
+.inmet-map-container { /* Wrapper for the INMET image */
+  width: 100%;
+  max-width: 800px; /* Control max size if needed */
+  margin: var(--spacing-lg) auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden; /* Needed for wrapper */
+  box-shadow: var(--box-shadow);
 }
 
-
-.container_mapa_inmet {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 0 12px;
-}
-
-/* wrapper interno que animaremos */
+/* INMET Map animation wrapper (Keep existing logic) */
 .mapa-wrapper {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 0px;                 /* inicia colapsado */
-  overflow: hidden;            /* esconde a imagem até expandir (faz o "empurrar") */
-  transition: height 800ms ease; /* ajuste a duração se quiser */
+  height: 0;
+  overflow: hidden;
+  transition: height 800ms ease;
+  background-color: var(--dark-bg); /* Placeholder background */
 }
-
-/* imagem responsiva dentro do wrapper */
 .mapa-wrapper img {
   display: block;
   width: 100%;
   height: auto;
 }
 
+/* Leaflet Legend styling */
+.legenda {
+  padding: 8px 12px;
+  font: 14px/1.5 var(--font-main);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+}
+.legenda h4 {
+    margin: 0 0 5px;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+.legenda i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.9;
+  border: 1px solid rgba(0,0,0,0.1);
+}
 
+/* --- Footer --- */
+footer.site-footer { /* Renamed class */
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  padding: var(--spacing-lg) 0;
+  margin-top: var(--spacing-xl); /* Space above footer */
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
 
+footer.site-footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
 
-
-
-
-/* ================================== */
-/* ESTILOS PARA TELAS PEQUENAS */
-/* ================================== */
-
-
-@media (max-width: 820px) {
-
-  .container_mapa{
+.footer-credits, .footer-support {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 0 12px;
-  }
-
-  .mapa {
-    width: calc(100% - 24px); /* deixa uma folga nas laterais
-    height: 400px;            /* altura clara em telas pequenas */
-    min-height: 300px;
-    margin-top: 20px;
-    margin-left: 0;           /* anula a margin-left:100px do desktop */
-    margin-right: 0;
-    margin-inline: auto;
-  }
-
-.seletor {
-    margin-left: 0px;
-    margin-right: 0px;
-    width: 100%;
-    margin-top: 20px;
+    gap: var(--spacing-sm);
     text-align: center;
-  }
-
-
-
-header{
-  border-radius: 0;
 }
 
-
-  .contatos_main{
-  padding: 20px;
-    
+.footer-credits p, .footer-support p {
+    font-weight: bold;
+    margin-bottom: var(--spacing-xs);
+    text-decoration: none; /* Removed underline */
 }
 
-.main_home{
-padding-left: 0;
-padding-right: 0;
-width: 100%;
-background-color: #f4f4f4;
-border-radius: 0;
+.footer-logo-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
-.main_inmet{
- padding-left: 0;
- padding-right: 0;
- width: 100%;
- background-color: #f4f4f4;
- border-radius: 0;
-}
-
-.sobre_main{
- padding-left: 0;
- padding-right: 0;
- width: 100%;
- background-color: #f4f4f4;
- border-radius: 0;
-}
-
-.contatos_main{
- padding-left: 0;
- padding-right: 0;
- width: 100%;
- background-color: #f4f4f4; 
- border-radius: 0;
-}
-
-header{
-  margin: auto;
-  margin-bottom: 0px;
-  padding: 15px;
-  background-color: #B74134;
-  width: 100%;
-}
-
-.inmet_main{
-    padding: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-footer.footer {
-  margin: auto;
-  position: static;    /* NÃO fixed */
-  width: 100%;
-  background-color: #B74134;
-  color: aliceblue;
-  padding: 0.5%;
-  text-align: center;
-  border-radius: 0;
-
-  /* Espaço entre o fim do main e o footer (ajuste o valor se quiser mais/menos) */
-  margin-top: 0px;
-}
-
-.sobre_main{
-    padding: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-
-.contatos_main{
-    padding: 20px;
-    margin: auto;    
-}
-
-.titulo_mapa{
-  font-size: 30px;
-  margin-top: 15px;
-  text-decoration:underline;
-  margin-left: 40px;
-}
-
-
-}
-
-@media (max-width: 900px) {
-
-.mapa_inmet{
-    width: 100%; /* deixa uma folga nas laterais */
+.footer-logo-group img {
+    width: 40px;
     height: auto;
-    margin-top: 20px;
-    margin-left: 0;           /* anula a margin-left:100px do desktop */
-    margin-right: 0;
-    margin-inline: auto;
+    border-radius: 4px; /* Optional rounded logos */
 }
 
-.butao{
-  margin-right: 20px;
+.footer-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: #6c757d; /* Lighter gray */
 }
 
+/* --- Responsiveness --- */
 
-}
-
-
-@media (max-width: 730px) {
-
-  header{
-    position: relative;
-    z-index: 100000000;
-  }
-
-.off-screen-menu{
-  background-color: #B74134;
-  height: 0px;
-  width: 100%;
-  max-width: 100%;
-  position: fixed;
-  top: 75px;
-  left: 0;
-  z-index: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-  padding-top: 0; /* Removemos o espaçamento quando o menu está fechado */
-  transition: height 0.3s ease-in-out;
-   overflow: hidden;
-}
-
-.off-screen-menu.active{
-  height: 75px;
-  top: 75px;
-}
-
-.menu-ham{
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.ham-menu{
-  height: 30px;
-  width: 30px;
-  margin-left: auto;
-  position: relative;
-  z-index: 10001;
-}
-
-.ham-menu span{
-  height: 5px;
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 25px;
-  position: absolute;
-  top: 33%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  transition: .3s ease;
-}
-
-.ham-menu span:nth-child(1){
-  top: 0%;
-}
-
-.ham-menu span:nth-child(3){
-  top: 66%;
-}
-
-.ham-menu.active span:nth-child(1){
-  top:50%;
-  transform: translate(-50%,-50%) rotate(45deg);
-  z-index: 1000000;
-}
-
-.ham-menu.active span:nth-child(2){
- opacity: 0;
-}
-
-.ham-menu.active span:nth-child(3){
-  top:50%;
-  transform: translate(-50%,-50%) rotate(-45deg);
-  z-index: 1000000;
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    .map-container { height: 450px; }
 }
 
 
-.naveg{
- display: none;
+/* Small screens (landscape phones, small tablets) */
+@media (max-width: 768px) {
+    /* Show Hamburger */
+    .menu-ham-button {
+        display: flex;
+    }
+    /* Hide Desktop Nav */
+    nav.main-nav {
+        display: none;
+    }
+    /* Adjust controls section */
+    .controls-section {
+        flex-direction: column;
+        align-items: stretch; /* Stretch items full width */
+        gap: var(--spacing-xs); /* ADICIONE ESTA LINHA para reduzir o espaço vertical */
+    }
+
+    .button {
+        width: 100%; /* Full width button on small screens */
+    }
+
+    footer.site-footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    .map-container { height: 400px; }
+    .legenda { font-size: 12px; }
+    .legenda i { width: 15px; height: 15px; }
 }
 
-.off-screen-menu div a{
- text-decoration: none;
- text-align: center;
- color: #ffffff;
- font-size: 20px;
-}
-
-  
-}
-
-
-@media (width < 500px) {
-
-.off-screen-menu div a{
- font-size: 100%;
-}
-
-
-.legenda{
-  display: none;
-}
-  
-}
-
-
-
-
-
-@media (width > 730px) {
-
-  .off-screen-menu{
-    display: none;
-  }
-
-  .menu-ham{
-    display: none;
-  }
-  
+/* Extra small screens (portrait phones) */
+@media (max-width: 576px) {
+    body { font-size: 15px; }
+    .container { width: 95%; padding-left: var(--spacing-sm); padding-right: var(--spacing-sm);}
+    .logo-text { font-size: 1.1rem; }
+    .map-container { height: 350px; }
+    .legenda { display: none; } /* Hide legend on very small screens, maybe add a button to toggle it */
 }

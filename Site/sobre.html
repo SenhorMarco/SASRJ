@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<header class="home">
-    <div class="off-screen-menu">
-        <div class="home_div" style="align-items: center;"><a href="index.html">Home</a></div>
-        <div class="inmet_div"><a href="inmet.html">INMET</a></div>
-        <div class="sobre_div"><a href="sobre.html" style="text-decoration: underline;">Sobre</a></div>
-        <div class="contatos_div"><a href="contatos.html">Contatos</a></div>
-                        <div class="inscrever_div"><a href="inscrever.php" style="color: rgba(255, 255, 3, 0.729);">Inscreva&#8209se</a></div>
-    </div>
-
-
-
-
-
+<header class="site-header">
     <div class="container">
         <div style="display: flex; flex-direction: row; gap: 10px; align-items: center;"><div style="display: flex; flex-direction: column;"><img src="img/SAS-RJ_logo.png" alt="SAS/RJ" style="width: 30px;"></div><div class="logo">Sistema de Alertas de Seca RJ - SAS/RJ</div></div>
         <div class="menu">
@@ -30,24 +18,33 @@
                 <div class="inmet_div"><a href="inmet.html">INMET</a></div>
                 <div class="sobre_div"><a href="sobre.html" class="sobre">Sobre</a></div>
                 <div class="contatos_div"><a href="contatos.html">Contatos</a></div>
-                <div class="inscrever_div"><a href="inscrever.php" class="inscrever">Inscreva&#8209se</a></div>
+                                <div class="inscrever_div"><a href="inscrever.html" class="inscrever">Inscreva&#8209se</a></div>
                 </div>
             </nav>
         </div>
 
-    <nav class="menu-ham">
-        <div class="ham-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-    </nav>
+        <button class="menu-ham-button" aria-label="Toggle Menu">
+            <div class="ham-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
     </div>
 </header>
 
+<nav class="off-screen-menu">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="inmet.html" class="nav-inmet">INMET</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
+    <a href="contatos.html" class="nav-contatos">Contatos</a>
+    <a href="inscrever.html" class="highlight nav-inscrever">Inscreva-se</a>
+</nav>
+
 
 <body>
-    <main class="sobre_main">
+    <main>
+        <div class="container section-padding">
         <h3 class="titulo_sobre" style="margin-top: 10px; margin-bottom: 8px;">O que é o SAS/RJ?</h3>
         <p>O Sistema de Alertas de Secas para o Estado do Rio de Janeiro é um monitor de secas e funciona como um processo de acompanhamento regular e períodico da seca no estado do Rio, cujos resultados consolidados são divulgados por meio de um mapa que pode ser encontrado na seção <a href="index.html">Home</a> e por meio de alertas via e-mail para aqueles que se inscreverem no site. O mapa é mensal e apresenta a situação da seca nas regiões do estado, assim como as regiões que não foram afetadas pelo fenômeno.</p>
         <p>Nos locais com seca, o Monitor mostra, com uma escala de cores, o grau de severidade da seca, que pode ser: fraca, moderada, grave, extrema ou excepcional.</p>
@@ -62,45 +59,49 @@
         <h3 class="titulo_sobre" style="margin-top: 20px; margin-bottom: 8px;">Sobre o projeto SAS/RJ</h3>
         <p>O projeto SAS/RJ foi desenvolvido pelos alunos do IME (Instituto Militar de Engenharia) <a href="#" target="_blank">Davi Braga</a>, Marco Kossooski, Eduardo Palos, Davi Brasil e Brenno Zanandrea, orientados pela Profª Raquel Aguiar, em parceria com a Defesa Civil do Rio de Janeiro, a fim de auxiliar na prevenção de problemas relacionados ao fenômeno da seca no estado.</p>
         
-
+</div>
     </main>
 
-<footer class="footer">
-<div class="container_footer">
-
-<!-- <div class="navegação_footer">
-    <p style="margin: auto;">Mapa do site</p>
-    <a href="index.html" class="footer_nav">Home</a>
-    <a href="sobre.html" class="footer_nav">Sobre</a>
-    <a href="contatos.html" class="footer_nav">Contatos</a>
-    <a href="inmet.html" class="footer_nav">INMET</a>
-</div> -->
-
-
-<div class="apoio_footer">
-
-    <p style="text-decoration: solid; text-decoration: underline; text-align: center;">Apoio:</p>
-    <div style="display: flex; flex-direction: row;"><div><img src="img/ime_logo.png" alt="Logo do IME" style="width: 50px;"></div> <div style="margin: auto; color: black;">Instituto Militar de Engenharia</div></div>
-
-
-    <p style="text-decoration: solid; text-decoration: underline; margin-bottom: 10px; text-align: center;">Créditos:</p>
-    <div style="display: flex; flex-direction: row; gap: 15px;"><div><img src="img/inmet_logo.png" alt="Logo do Inmet" style="width: 40px; border-radius: 8px;"></div> <div style="margin: auto; color: black;">Instituto Nacional de Metereologia</div></div>
-
-</div>
-
-</div> 
-
-<br> <hr> <br>
-
-Todos os direitos reservados.
-
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-support">
+            <p>Apoio:</p>
+            <div class="footer-logo-group">
+                <img src="img/ime_logo.png" alt="Logo do IME">
+                <span>Instituto Militar de Engenharia</span>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>Créditos dos Dados:</p>
+            <div class="footer-logo-group">
+                 <img src="img/inmet_logo.png" alt="Logo do Inmet">
+                 <span>Instituto Nacional de Meteorologia</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> SAS/RJ. Todos os direitos reservados.</p>
+    </div>
 </footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
-</body>
+<script>
+    // Add active class to current page link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.nav-links a, .off-screen-menu a');
 
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop() || 'index.html';
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 <script src="menu-hamburguer.js"></script>
 
-
+</body>
 
 
 </html>
