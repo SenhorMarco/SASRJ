@@ -1,3 +1,4 @@
 .gitignore
 Site/Dados
 Site/DadosJSON
+Site/.htaccess

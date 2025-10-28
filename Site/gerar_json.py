@@ -3,6 +3,7 @@ import numpy as np
 import os
 import json
 
+#Descartado, refereir a download.py
 # Esse script não roda durante a utilização do site:
 # Ele é pra ser utilizado nos arquivos de dados disponibilizados para que possam ser adicionados à "base de dados"
 # Ler diretamente dos arquivos .nc reduz a manutenção necessária mas é devagar demais 

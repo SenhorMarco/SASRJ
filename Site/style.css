@@ -25,7 +25,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  background-image: url('/img/passeio-de-bondinho-no-rj-corcovadoo-conexao123.webp');
+  background-image: url('/img/old.webp');
   background-attachment: fixed;
   background-position: center;
 }
@@ -441,7 +441,6 @@ border-radius: 0;
 }
 
 .sobre_main{
- background-color: ;
  padding-left: 0;
  padding-right: 0;
  width: 100%;
@@ -450,7 +449,6 @@ border-radius: 0;
 }
 
 .contatos_main{
-  background-color: ;
  padding-left: 0;
  padding-right: 0;
  width: 100%;

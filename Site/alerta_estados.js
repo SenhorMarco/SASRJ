@@ -1,7 +1,7 @@
 import * as mi from "./mapa_interativo.js";
 
 export const SPI_LIMIAR_AVISO = 1.6;
-const RAIO_MARCADOR = 0.3;
+const RAIO_MARCADOR = 0.4;
 
 const MARCADOR_TAMANHO = 30;
 
@@ -83,36 +83,30 @@ export function analisar_estados(dados){
     }
 
     estados.features.forEach(estado => {
-        estado.spi_max = 0;
-        estado.spi_min = 0;
+        estado.properties.spi_max = 0;
+        estado.properties.spi_min = 0;
         estado.geometry.pontos_contidos.forEach(ponto => {
 
-            if(dados[ponto[0]][ponto[1]] > estado.spi_max){
-                estado.spi_max = dados[ponto[0]][ponto[1]];
+            if(dados[ponto[0]][ponto[1]] > estado.properties.spi_max){
+                estado.properties.spi_max = dados[ponto[0]][ponto[1]];
             }
-            else if(dados[ponto[0]][ponto[1]] < estado.spi_min){
-                estado.spi_min = dados[ponto[0]][ponto[1]];
+            else if(dados[ponto[0]][ponto[1]] < estado.properties.spi_min){
+                estado.properties.spi_min = dados[ponto[0]][ponto[1]];
             }
 
-            if(estado.spi_max > SPI_LIMIAR_AVISO && !estados_alerta.chuva.includes(estado)){
+            if(estado.properties.spi_max > SPI_LIMIAR_AVISO && !estados_alerta.chuva.includes(estado)){
                 estados_alerta.chuva.push(estado);
                 estado.geometry.ponto_maximo = [ponto[0],ponto[1]];
             }
-            else if(estado.spi_min < -SPI_LIMIAR_AVISO && !estados_alerta.seca.includes(estado)){
+            else if(estado.properties.spi_min < -SPI_LIMIAR_AVISO && !estados_alerta.seca.includes(estado)){
                 estados_alerta.seca.push(estado);
                 estado.geometry.ponto_minimo = [ponto[0],ponto[1]];
             }
         });
     });
-    console.log(estados_alerta);
     return estados_alerta;
 }
 
-function click_alerta() {
-    console.log("Oi");
-    let area_texto = document.getElementById("info_alerta");
-    area_texto.innerHTML += "oi";
-}
 //fiquei sem saco
 export function adicionar_sinais(estados){
     let marcadores_seca = [];
@@ -132,7 +126,7 @@ export function adicionar_sinais(estados){
 
         })
         if(isolado){
-            if(estado.spi_min > -2){
+            if(estado.properties.spi_min > -2){
                 let marcador_atual = L.marker([lat, lon], {icon: alerta_seca_extrema}).addTo(mi.mapa);
                 marcador_atual.estados = [];
                 marcador_atual.estados.push(estado.properties.name);
@@ -145,8 +139,8 @@ export function adicionar_sinais(estados){
                     margin-right: auto;"></img><br>
                     Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
                     Situação: Seca extrema<br>
-                    SPI na região: ${estado.spi_min.toFixed(2)}<br>
-                    Municípios afetados: ${marcador_atual.estados}
+                    SPI na região: ${estado.properties.spi_min.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados.join(", ")}
                     `;
                 });
                 marcador_atual.bindTooltip("Seca extrema");
@@ -166,8 +160,8 @@ export function adicionar_sinais(estados){
                     margin-right: auto;"></img><br>
                     Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
                     Situação: Seca excepcional<br>
-                    SPI na região: ${estado.spi_min.toFixed(2)}<br>
-                    Municípios afetados: ${marcador_atual.estados}
+                    SPI na região: ${estado.properties.spi_min.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados.join(", ")}
                     `;
                 });
                 marcadores_seca.push(marcador_atual);
@@ -191,7 +185,7 @@ export function adicionar_sinais(estados){
             }
         })
         if(isolado){
-            if(estado.spi_max < 2){
+            if(estado.properties.spi_max < 2){
                 let marcador_atual = L.marker([lat, lon], {icon: alerta_chuva_extrema}).addTo(mi.mapa);
                 marcador_atual.estados = [];
                 marcador_atual.estados.push(estado.properties.name);
@@ -205,8 +199,8 @@ export function adicionar_sinais(estados){
                     margin-right: auto;"></img><br>
                     Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
                     Situação: Chuva extrema<br>
-                    SPI na região: ${estado.spi_max.toFixed(2)}<br>
-                    Municípios afetados: ${marcador_atual.estados}
+                    SPI na região: ${estado.properties.spi_max.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados.join(", ")}
                     `;
                 });
                 marcadores_chuva.push(marcador_atual);
@@ -225,8 +219,8 @@ export function adicionar_sinais(estados){
                     margin-right: auto;"></img><br>
                     Coordenadas: Latitude ${lat.toFixed(2)}° Longitude ${lon.toFixed(2)}° <br>
                     Situação: Chuva excepcional<br>
-                    SPI na região: ${estado.spi_max.toFixed(2)}<br>
-                    Municípios afetados: ${marcador_atual.estados}
+                    SPI na região: ${estado.properties.spi_max.toFixed(2)}<br>
+                    Municípios afetados: ${marcador_atual.estados.join(", ")}
                     `;
                 });
                 marcadores_chuva.push(marcador_atual);
@@ -235,5 +229,11 @@ export function adicionar_sinais(estados){
     });
 }
 
+var dados_php = {
+    
+}
 
+function enviar_dados_php(json){
+
+}
 

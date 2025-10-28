@@ -3,7 +3,7 @@ import * as lj from "./ler_json.js";
 import * as ae from "./alerta_estados.js"
 
 export var dados_recebidos
-export const ALPHA_MAX = 0.7;
+export const ALPHA_MAX = 0.8;
 
 const SECA_FRACA = "#f1c329ff";
 const SECA_MODERADA = "#d79846ff";
@@ -37,16 +37,12 @@ var botao_gerar = document.getElementById("botao_gerar");
 var input_data = document.getElementById("data");
 var input_spi = document.getElementById("intervalo");
 
-let dados;
-let dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
-let dados_interpolacao_teste = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
-
 //legenda do mapa
-var legenda = L.control({position: 'bottomright'});
-legenda.onAdd =  ()=> {
+var legenda = L.control({ position: 'bottomright' });
+legenda.onAdd = () => {
     var div = L.DomUtil.create('div', 'legenda'),
-    grades = [" Chuva excepcional", "Chuva extrema", "Chuva grave", "Chuva moderada", "Chuva fraca", "Seca fraca", "Seca moderada", "Seca grave", "Seca extrema", "Seca excepcional"],
-    cores = [CHUVA_EXCEPCIONAL, CHUVA_EXTREMA, CHUVA_GRAVE, CHUVA_MODERADA, CHUVA_FRACA, SECA_FRACA, SECA_MODERADA, SECA_GRAVE, SECA_EXTREMA, SECA_EXCEPCIONAL];
+        grades = [" Chuva excepcional", "Chuva extrema", "Chuva grave", "Chuva moderada", "Chuva fraca", "Seca fraca", "Seca moderada", "Seca grave", "Seca extrema", "Seca excepcional"],
+        cores = [CHUVA_EXCEPCIONAL, CHUVA_EXTREMA, CHUVA_GRAVE, CHUVA_MODERADA, CHUVA_FRACA, SECA_FRACA, SECA_MODERADA, SECA_GRAVE, SECA_EXTREMA, SECA_EXCEPCIONAL];
     div.innerHTML += "Legenda SPI/SPEI:<br>"
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML += '<i style="background:' + cores[i] + '"></i> ' + grades[i] + "<br>";
@@ -116,6 +112,8 @@ function escala_cores(spi) {
 }
 
 async function interpolacao_inverso_distancia(dados) {
+    let dados_interpolacao = Array.from(Array(mi.COLUNAS_MATRIZ), () => Array.from(Array(mi.LINHAS_MATRIZ), () => new Array(4)));
+
     for (let coluna = 0; coluna < mi.COLUNAS_MATRIZ; coluna++) {
         for (let linha = 0; linha < mi.LINHAS_MATRIZ; linha++) {
             if (coluna === 0 && linha === 0) {
@@ -160,7 +158,7 @@ async function interpolacao_inverso_distancia(dados) {
 
             else {
                 //resto
-                //horrivel, morra: mas DEVE funcionar
+                //horrivel, mas funciona
                 dados_interpolacao[coluna][linha][0] = 0.267 * dados[coluna][linha] + 0.169 * dados[coluna][linha - 1] + 0.169 * dados[coluna - 1][linha]
                     + 0.089 * dados[coluna - 1][linha - 1] + 0.064 * dados[coluna + 1][linha - 1] + 0.064 * dados[coluna - 1][linha + 1] +
                     0.074 * dados[coluna][linha + 1] + 0.074 * dados[coluna + 1][linha] + 0.053 * dados[coluna + 1][linha + 1];
@@ -182,31 +180,36 @@ async function interpolacao_inverso_distancia(dados) {
     return dados_interpolacao;
 }
 
-async function gerar_quadrantes() {
-    mi.mapa.eachLayer((layer) => {
-        if (layer.toGeoJSON) {
-            mi.mapa.removeLayer(layer);
-        }
-    });
+
+function dados_interpolacao_quadrante_para_2d(dados_interpolacao){
+    let dados_interpolacao_2d = Array.from(Array(2 * mi.COLUNAS_MATRIZ), () => new Array(2 * mi.LINHAS_MATRIZ));
 
     for (let longitude = mi.LONGITUDE_MIN; longitude < mi.LONGITUDE_MAX; longitude += mi.ARESTA) {
         let coluna_atual = Math.round((longitude - mi.LONGITUDE_MIN) / mi.ARESTA);
         for (let latitude = mi.LATITUDE_MIN; latitude < mi.LATITUDE_MAX; latitude += mi.ARESTA) {
             let linha_atual = Math.round((latitude - mi.LATITUDE_MIN) / mi.ARESTA);
             let spi_quadrante = dados_interpolacao[coluna_atual][linha_atual];
-
-            dados_interpolacao_teste[coluna_atual * 2][linha_atual * 2] = spi_quadrante[0];
-            dados_interpolacao_teste[coluna_atual * 2 + 1][linha_atual * 2] = spi_quadrante[1];
-            dados_interpolacao_teste[coluna_atual * 2][linha_atual * 2 + 1] = spi_quadrante[2];
-            dados_interpolacao_teste[coluna_atual * 2 + 1][linha_atual * 2 + 1] = spi_quadrante[3];
+            dados_interpolacao_2d[coluna_atual * 2][linha_atual * 2] = spi_quadrante[0];
+            dados_interpolacao_2d[coluna_atual * 2 + 1][linha_atual * 2] = spi_quadrante[1];
+            dados_interpolacao_2d[coluna_atual * 2][linha_atual * 2 + 1] = spi_quadrante[2];
+            dados_interpolacao_2d[coluna_atual * 2 + 1][linha_atual * 2 + 1] = spi_quadrante[3];
         }
     }
+    return dados_interpolacao_2d;
+}
 
-    for (let longitude = mi.LONGITUDE_MIN; longitude < mi.LONGITUDE_MAX; longitude += (mi.ARESTA / 2)) {
+async function gerar_quadrantes(dados_interpolacao_2d) {
+    mi.mapa.eachLayer((layer) => {
+        if (layer.toGeoJSON) {
+            mi.mapa.removeLayer(layer);
+        }
+    });
+
+    for (let longitude = mi.LONGITUDE_MIN; longitude < mi.LONGITUDE_MAX - (mi.ARESTA/2); longitude += (mi.ARESTA / 2)) {
         let coluna = Math.round((longitude - mi.LONGITUDE_MIN) / (mi.ARESTA / 2));
         for (let latitude = mi.LATITUDE_MIN; latitude < mi.LATITUDE_MAX; latitude += (mi.ARESTA / 2)) {
             let linha = Math.round((latitude - mi.LATITUDE_MIN) / (mi.ARESTA / 2));
-            let spi_quadrante = dados_interpolacao_teste[coluna][linha];
+            let spi_quadrante = dados_interpolacao_2d[coluna][linha];
             let quadrante = {
                 "type": "Feature",
                 "geometry": {
@@ -232,22 +235,93 @@ async function gerar_quadrantes() {
 }
 
 botao_gerar.onclick = async () => {
-    if(input_data.value === ""){
+    if (input_data.value === "") {
         return;
     }
 
     document.getElementById("info_alerta").innerHTML = "";
+
     //gerar coloração no mapa
     botao_gerar.disabled = true;
-    dados = await lj.pescar_dados(input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7) + input_data.value.substring(8));
-    dados_interpolacao = await interpolacao_inverso_distancia(dados);
-    gerar_quadrantes();
+    let dados = await lj.pescar_dados(input_spi.value.toString().padStart(2, '0') + input_data.value.substring(0, 4) + input_data.value.substring(5, 7));
+    let dados_interpolacao = await interpolacao_inverso_distancia(dados);
+    let dados_interpolacao_2d = dados_interpolacao_quadrante_para_2d(dados_interpolacao);
+    gerar_quadrantes(dados_interpolacao_2d);
     botao_gerar.disabled = false;
 
     //gerar relatório
-    let estados_alerta = ae.analisar_estados(dados_interpolacao_teste);
-    console.log(estados_alerta);
+    let estados_alerta = ae.analisar_estados(dados_interpolacao_2d);
     ae.adicionar_sinais(estados_alerta);
+}
 
+window.onload = enviar_dados_relatorio();
+
+async function enviar_dados_relatorio(){
+    let json_relatorio = {
+        ano: "",
+        mes: "",
+        spi1:{
+            seca:[],
+            chuva:[]
+        },
+        spi12: {
+            seca:[],
+            chuva:[]
+        }
+    }
+
+    let data_ultimo_email_json = await fetch("data_ultimo_email.json");
+    let data_ultimo_email = JSON.parse(await data_ultimo_email_json.text());
+    let proximo_mes = data_ultimo_email["mes"] + 1;
+    let proximo_ano = data_ultimo_email["ano"];
+    if(proximo_mes === 13){
+        proximo_mes = 1;
+        proximo_ano += 1
+    }
+
+    json_relatorio.ano = String(proximo_ano);
+    json_relatorio.mes = String(proximo_mes).padStart(2,0);
+    try{
+        let dados_spi1 = await lj.pescar_dados("01" + String(proximo_ano) + String(proximo_mes).padStart(2,0));
+        let dados_interpolados_spi1 = await interpolacao_inverso_distancia(dados_spi1);
+        let dados_interpolados_2d_spi1 = dados_interpolacao_quadrante_para_2d(dados_interpolados_spi1);
+        let estados_alerta_spi1 = ae.analisar_estados(dados_interpolados_2d_spi1);
+        let dados_spi12 = await lj.pescar_dados("12" + String(proximo_ano) + String(proximo_mes).padStart(2,0));
+        let dados_interpolados_spi12 = await interpolacao_inverso_distancia(dados_spi12);
+        let dados_interpolados_2d_spi12 = dados_interpolacao_quadrante_para_2d(dados_interpolados_spi12);
+        let estados_alerta_spi12 = ae.analisar_estados(dados_interpolados_2d_spi12);
+
+        //não quero guardar no relatório a geometria de cada municipio
+
+        estados_alerta_spi1.seca.forEach(estado => {
+            json_relatorio.spi1.seca.push(estado.properties)
+        })
+
+        estados_alerta_spi1.chuva.forEach(estado => {
+            json_relatorio.spi1.chuva.push(estado.properties)
+        })
+
+        estados_alerta_spi12.seca.forEach(estado => {
+            json_relatorio.spi12.seca.push(estado.properties)
+        })
+
+        estados_alerta_spi12.chuva.forEach(estado => {
+            json_relatorio.spi12.chuva.push(estado.properties)
+        })
+
+        await fetch("enviar_emails.php", {
+            method: "POST",
+            headers: {
+            'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(json_relatorio)
+        }).
+        then(resposta => resposta.text()).
+        then(mensagem => console.log(mensagem));
+
+    }
+    catch(e){
+        console.log("ja esta atualizado: + e");
+    }
 }
 
